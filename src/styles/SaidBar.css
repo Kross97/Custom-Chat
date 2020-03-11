@@ -1,0 +1,72 @@
+.container {
+  border-right: 3px solid white;
+  width: 25%;
+  height: 1000px;
+}
+
+.navContainer {
+  width: 100%;
+  height: 60px;
+  padding: 20px 0px 0 20px;
+  display: flex;
+  position: relative;
+  justify-content: flex-start;
+}
+
+.search {
+  width: 50%;
+  height: 45px;
+  padding-left: 35px;
+  margin-left: 20px;
+  box-sizing: border-box;
+  background-color: #242f3d;
+  color: #636f7a;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+}
+
+.btnMainMenu {
+  background-image: url('../img/open-menu.png');
+  background-repeat: no-repeat;
+  background-color: #17212b;
+  border: none;
+  width: 10%;
+  height: 34px;
+  cursor: pointer;
+  margin-top: 6px;
+}
+
+/* SHOW MENU */
+.menuAddition {
+  position: absolute;
+  transition: 0.5s ease-in-out;
+  width: 47%;
+  height: 185px;
+  background-color: #2d3a47;
+  color: #ffffff;
+  left: -210px;
+  top: 75px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 21px;
+}
+
+.showMenu {
+ left: 10px;
+}
+
+.btnShowMenu {
+  background-color: #2d3a47;
+  color: #636f7a;
+  border: none;
+  font-size: 1.1em;
+  margin-top: 10px;
+  box-sizing: border-box;
+}
+
+.btnShowMenu:hover {
+  background-color: #395169;
+  border: 1px solid #636f7a;
+  color: #8d9caa;
+}
