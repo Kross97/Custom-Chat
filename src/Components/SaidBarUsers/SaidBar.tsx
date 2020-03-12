@@ -9,22 +9,10 @@ import { IApplicationState } from '../../Global_Interface';
 export const SaidBarUsers = (props: ISaidBarUsersProps) => {
   const { showFormAddUser, showFormAddAudio } = props;
 
-  const singleAlert = new Audio();
-  const srcSingleAlert = useSelector(({ currentAudio: { currentAudio } }: IApplicationState) => {
-    if (currentAudio.length !== 0) {
-      return currentAudio[0].src;
-    }
-  });
-  if (srcSingleAlert != undefined) {
-    singleAlert.src = srcSingleAlert;
-  } else {
-    singleAlert.src = '#';
-  }
-
   return (
     <aside className={saidBar.container}>
       <Navigation showFormAddAudio={showFormAddAudio} showFormAddUser={showFormAddUser} />
-      <ListUsers singleAlert={singleAlert} />
+      <ListUsers />
     </aside>
   );
 };

@@ -9,9 +9,36 @@
   background-repeat: no-repeat;
   background-size: cover;
   width: 100%;
-  height: 100%;
+  height: 91.3%;
+  max-height: 91.3%;
+  overflow: auto;
+  scrollbar-width: none;
 }
 
+
+/* ITEM MESSAGE */
+
+.containerItemMessage {
+max-width: 35%;
+background-color: #17212b;
+color: #fff;
+padding: 25px 45px 30px 47px;
+margin: 20px 15px 15px 25px;
+border-radius: 82px 15px 15px 0px;
+clear: both;
+float: left;
+position: relative;
+}
+
+.dateMessage {
+  color: #6c7883;
+  position: absolute;
+  bottom: 10px;
+  right: 14px;
+  font-size: 1em;
+}
+
+/* NAVIGATION MESSAGES */
 
 .containerNav {
   width: 100%;
@@ -21,7 +48,6 @@
 }
 
 
-/* NAVIGATION MESSAGES */
 .btnMenu {
 width: 4.5%;
 height: 85%;
@@ -39,4 +65,38 @@ margin-top: 5px;
 .btnMenu:hover {
   cursor: pointer;
   background-color: #242f3d;
+}
+
+/* MENU NAVIGATION */
+.menuAddition {
+  position: absolute;
+  transition: 0.6s ease;
+  width: 12%;
+  height: 2%;
+  background-color: #17212b;
+  color: #ffffff;
+  right: 14px;
+  top: 25px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0px 0 20px 20px;
+  padding-top: 15px;
+  z-index: -1;
+}
+
+.menuAdditionActive {
+  z-index: 1;
+  height: 22%;
+  top: 53px;
+}
+
+.menuAddition button {
+  width: 100%;
+  padding: 0 0 0 0;
+}
+
+.linkDeleteUser {
+  width: 101%;
+  display: inline-block;
+  text-decoration: none;
 }

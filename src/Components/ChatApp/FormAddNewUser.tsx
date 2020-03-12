@@ -45,6 +45,8 @@ export const FormAddNewUser = (props: IFormAddNewUser) => {
    }
   }
 
+ const { showFormAddUser } = props;
+
   const addUser = (event: React.FormEvent<HTMLFormElement>) => {
    event.preventDefault();
    const user = {
@@ -58,9 +60,10 @@ export const FormAddNewUser = (props: IFormAddNewUser) => {
    setImgSrc('');
    setName('');
    setSurName('');
+   showFormAddUser();
   }
 
- const { showFormAddUser } = props;
+
   return (
   <>
     <div onClick={showFormAddUser} className={chatApp.blockBackground} />

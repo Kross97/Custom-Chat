@@ -1,5 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, combineReducers, PayloadAction } from '@reduxjs/toolkit';
+import _ from 'lodash';
+// import { IMessage } from '../../Global_Interface';
 import * as Users from './AllUsers__Inteface';
 import * as Audio from './CurrentAudio_interface';
 
@@ -33,6 +35,7 @@ export const allUsers = createSlice({
       const usersId = users.map((user) => user.id);
       state.allUsersId = usersId;
       users.forEach((user) => {
+        user.allMessages.forEach((message) => ({ id: _.uniqueId(), ...message }));
         state.allDataUsers[user.id] = user;
       });
       state.loadingState = 'loading users Succes';
@@ -43,13 +46,27 @@ export const allUsers = createSlice({
     addNewMessageRequest: (state) => {
       state.loadingState = 'add message Request';
     },
-    addNewMessageSucces: (state, action) => {
+    addNewMessageSucces: (state, action: PayloadAction<Users.IAddMessage>) => {
       const { message } = action.payload;
       state.allDataUsers[message.idUser].allMessages.push(message);
       state.loadingState = 'add message Succes';
     },
     addNewMessageFailed: (state) => {
       state.loadingState = 'add message Failed';
+    },
+    deleteCurrentUser: (state, action) => {
+      const { allDataUsers, allUsersId } = state;
+      const { currentUserId } = action.payload;
+      if (currentUserId !== 0) {
+        const newAllDataUsers = _.omit(allDataUsers, `${currentUserId}`);
+        const newAllUsersId = allUsersId.filter((id) => id !== currentUserId);
+        state.allDataUsers = newAllDataUsers;
+        state.allUsersId = newAllUsersId;
+      }
+    },
+    deleteCurrentUserAllMessages: (state, action) => {
+      const { currentUserId } = action.payload;
+      state.allDataUsers[currentUserId].allMessages = [];
     },
   },
 });

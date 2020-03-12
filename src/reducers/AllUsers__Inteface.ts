@@ -1,4 +1,4 @@
-import { IUser } from '../Global_Interface';
+import { IUser, IMessage } from '../Global_Interface';
 
 export interface IStateAllUsers {
   allDataUsers: {
@@ -15,4 +15,12 @@ export interface ILoadingUsers {
 
 export interface IAddUsers {
   user: IUser,
+}
+
+export interface ISetUserId {
+  id: number,
+}
+
+export interface IAddMessage {
+  message: IMessage,
 }

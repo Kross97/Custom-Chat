@@ -12,13 +12,4 @@ export interface INavigationProps {
 
 export interface IUserItemProps {
   user: IUser;
-  singleAlert: HTMLAudioElement,
-  match: {
-    params: {
-      id: string,
-    }
-  }
-}
-export interface IListUsersProps {
-  singleAlert: HTMLAudioElement,
 }
