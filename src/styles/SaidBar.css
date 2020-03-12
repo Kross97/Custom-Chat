@@ -2,6 +2,7 @@
   border-right: 3px solid white;
   width: 25%;
   height: 1000px;
+  display: inline-block;
 }
 
 .navContainer {
@@ -41,7 +42,7 @@
 .menuAddition {
   position: absolute;
   transition: 0.5s ease-in-out;
-  width: 47%;
+  width: 51%;
   height: 185px;
   background-color: #2d3a47;
   color: #ffffff;
@@ -50,6 +51,7 @@
   display: flex;
   flex-direction: column;
   border-radius: 21px;
+  z-index: 1;
 }
 
 .showMenu {
@@ -69,4 +71,35 @@
   background-color: #395169;
   border: 1px solid #636f7a;
   color: #8d9caa;
+}
+
+/* LIST USERS */
+
+.imgUser {
+  width: 22%;
+  border-radius: 45px;
+  height: 77px;
+}
+
+.UserContainer{
+  position: relative;
+  width: 95%;
+  height: 92px;
+  cursor: pointer;
+}
+
+.UserContainerActive {
+  background-color: #3f5a75;
+}
+
+.UserContainer > div{
+  position: absolute;
+  color: #fff;
+  top: 2px;
+  left: 115px;
+  font-size: 1.3em;
+}
+
+.UserContainer > div span:nth-child(2) {
+  margin-left: 5px;
 }

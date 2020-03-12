@@ -52,6 +52,7 @@ export const FormAddNewUser = (props: IFormAddNewUser) => {
      name,
      surName,
      imgSrc,
+     allMessages: [],
    }
    addNewUser(user);
    setImgSrc('');
@@ -65,9 +66,9 @@ export const FormAddNewUser = (props: IFormAddNewUser) => {
     <div onClick={showFormAddUser} className={chatApp.blockBackground} />
       <form onSubmit={addUser} className={chatApp.formAddUser}>
       <div className={chatApp.dataImage}>
-        <img src={imgSrc} alt="фотография собеседника" />
-        <div className={chatApp.imageAdd}>
-          <img src={imgSrc} alt="фото" />
+      <img src={imgSrc} alt="фотография собеседника" />
+      <div className={chatApp.imageAdd}>
+        <img src={imgSrc} alt="фото" />
           <label>
             <div className={chatApp.customInput}>
             Загрузите фото

@@ -1,0 +1,42 @@
+.container {
+  width: 74.8%;
+  height: 700px;
+  display: inline-block;
+}
+
+.containerMessages {
+  background-image: url('../img/fonDialog.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+}
+
+
+.containerNav {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+}
+
+
+/* NAVIGATION MESSAGES */
+.btnMenu {
+width: 4.5%;
+height: 85%;
+background-image: url('../img/menu.png');
+background-repeat: no-repeat;
+background-size: auto;
+background-color: initial;
+border: none;
+background-position: 16px 15px;
+margin-right: 27px;
+border-radius: 50px;
+margin-top: 5px;
+}
+
+.btnMenu:hover {
+  cursor: pointer;
+  background-color: #242f3d;
+}

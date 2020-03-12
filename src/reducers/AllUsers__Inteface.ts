@@ -1,7 +1,10 @@
 import { IUser } from '../Global_Interface';
 
 export interface IStateAllUsers {
-  users: IUser[],
+  allDataUsers: {
+    [id: number]: IUser,
+  },
+  allUsersId: number[],
   loadingState: string,
 }
 
