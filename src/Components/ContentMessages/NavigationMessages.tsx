@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { bindActionCreators } from 'redux';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import cn from 'classnames';
-// import { IApplicationState } from '../../Global_Interface';
+import { IApplicationState } from '../../Global_Interface';
 import * as actions from '../../actions';
 import dialog from '../../styles/ContentMessages.css';
 
@@ -18,7 +18,7 @@ export const NavigationMessages = () => {
   const dispatch = useDispatch();
   const { deleteCurrentUser, deleteAllMessageUser } = bindActionCreators(aactionCreators, dispatch);
 
-  const currentUserId = Number(localStorage.getItem('currentUser'));
+  const currentUserId = useSelector((state: IApplicationState) => state.allUsers.currentUserId);
 
   const showMenu = () => {
     const isShowMenuCurrent = isShowMenu === 'hidden' ? 'show' : 'hidden';
@@ -42,7 +42,7 @@ export const NavigationMessages = () => {
     <div className={dialog.containerNav}>
       <div>zzz</div>
       <section className={styleMenu}>
-        <button onClick={deleteAllMessage} type="button">Удалить переписку</button>
+        <button onClick={deleteAllMessage} disabled={currentUserId === -1} type="button">Удалить переписку</button>
         <button onClick={deleteUser} disabled={currentUserId === -1} type="button"><Link className={dialog.linkDeleteUser} to="/">Удалить собеседника</Link></button>
       </section>
       <button onClick={showMenu} type="button" aria-label="menu" className={dialog.btnMenu} />

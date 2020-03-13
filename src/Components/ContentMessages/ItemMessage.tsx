@@ -5,8 +5,8 @@ import dialog from '../../styles/ContentMessages.css';
 export const ItemMessage = (props: IItemMessageProps) => {
   const { message } = props;
   const dateMes = new Date(message.date);
-  const hourWriting = dateMes.getHours();
-  const minuteWriting = dateMes.getMinutes();
+  const hourWriting: string = dateMes.getHours() <= 9 ? `0${dateMes.getHours()}` : `${dateMes.getHours()}`;
+  const minuteWriting: string = dateMes.getMinutes() <= 9 ? `0${dateMes.getMinutes()}` : `${dateMes.getMinutes()}`;
   return (
     <article className={dialog.containerItemMessage}>
       <span>{message.value}</span>

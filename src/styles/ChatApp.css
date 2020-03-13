@@ -18,11 +18,11 @@
   top: 0;
   left: 0;
   background-color: #606060;
-  opacity: 0.5;
+  opacity: 0.8;
 }
 
 .formAddUser {
-  background-color: #2d3a47;
+  background-color: #17212b;
   position: absolute;
   z-index: 2;
   top: 25%;
@@ -52,7 +52,8 @@
   margin-left: 20px;
   margin-bottom: 10px;
   box-sizing: border-box;
-  background-color: #242f3d;
+  background-color: #17212b;
+  border: 1px solid #506375;
   color: #636f7a;
   font-size: 16px;
   border: none;
@@ -75,7 +76,8 @@
 .dataBtns button{
   width: 46%;
   height: 60px;
-  background-color: #242f3d;
+  background-color: #17212b;
+  border: 1px solid #506375;
   border: none;
   color: #636f7a;
   border-radius: 30px;
@@ -97,7 +99,8 @@
   display: block;
   flex-basis: 45%;
   height: 235px;
-  background-color: #242f3d;
+  background-color: #17212b;
+  border: 1px solid #506375;
   color: #636f7a;
   margin: 20px 0px 35px 40px;
 }
@@ -133,7 +136,8 @@
   margin-left: 20px;
   margin-bottom: 10px;
   box-sizing: border-box;
-  background-color: #242f3d;
+  background-color: #17212b;
+  border: 1px solid #506375;
   color: #636f7a;
   font-size: 16px;
   border: none;

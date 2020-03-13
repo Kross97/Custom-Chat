@@ -1,5 +1,5 @@
 .container {
-  border-right: 3px solid white;
+  border-right: 3px solid #1f202c;
   width: 25%;
   height: 1000px;
   display: inline-block;
@@ -42,15 +42,17 @@
 .menuAddition {
   position: absolute;
   transition: 0.5s ease-in-out;
-  width: 51%;
-  height: 185px;
-  background-color: #2d3a47;
+  border: 1px solid #506375;
+  width: 57%;
+  height: 250px;
+  padding-top: 11px;
+  background-color: #17212b;
   color: #ffffff;
-  left: -225px;
-  top: 75px;
+  left: -255px;
+  top: 85px;
   display: flex;
   flex-direction: column;
-  border-radius: 21px;
+  border-radius: 12px;
   z-index: 1;
 }
 
@@ -59,47 +61,83 @@
 }
 
 .btnShowMenu {
-  background-color: #2d3a47;
-  color: #636f7a;
+  background-color: #17212b;
+  color: #ffff;
   border: none;
   font-size: 1.1em;
   margin-top: 10px;
   box-sizing: border-box;
+  width: 100%;
+  height: 20%;
 }
 
 .btnShowMenu:hover {
-  background-color: #395169;
-  border: 1px solid #636f7a;
-  color: #8d9caa;
+  background-color: #2d4154;
 }
 
 /* LIST USERS */
 
+.listUsers {
+width: 100%;
+box-sizing: border-box;
+padding: 0;
+height: 88%;
+max-height: 88%;
+}
+
 .imgUser {
-  width: 22%;
+  width: 20%;
   border-radius: 45px;
-  height: 77px;
+  height: 68%;
+  margin: 11px 0 0px 8px;
 }
 
 .UserContainer{
   position: relative;
-  width: 95%;
+  width: 100%;
   height: 92px;
   cursor: pointer;
+  display: flex;
+  padding-left: 15px;
+  box-sizing: border-box;
 }
 
 .UserContainerActive {
   background-color: #3f5a75;
 }
 
-.UserContainer > div{
-  position: absolute;
+.UserContainer > div {
+  width: 100%;
+  height: 100%;
+  font-size: 1.4em;
+  cursor: pointer;
+  display: block;
+  box-sizing: border-box;
+  padding-left: 40px;
+  padding-top: 5px;
+  position: relative;
   color: #fff;
-  top: 2px;
-  left: 115px;
-  font-size: 1.3em;
+  text-decoration: none;
+}
+
+.UserContainer > div > article {
+  color: #67737e;
+  font-size: 0.8em;
+  position: absolute;
+  bottom: 18px;
+}
+
+.UserContainerActive > div > article {
+  color: #ffffff;
 }
 
 .UserContainer > div span:nth-child(2) {
-  margin-left: 5px;
+  position: absolute;
+  top: 0;
+  right: 8px;
+  color: #6c7883;
+}
+
+.UserContainerActive > div span:nth-child(2) {
+  color: #ffff;
 }

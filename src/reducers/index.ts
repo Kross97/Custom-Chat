@@ -8,6 +8,7 @@ import * as Audio from './CurrentAudio_interface';
 const allUsersState: Users.IStateAllUsers = {
   allDataUsers: {},
   allUsersId: [],
+  currentUserId: -1,
   loadingState: '',
 };
 
@@ -54,19 +55,28 @@ export const allUsers = createSlice({
     addNewMessageFailed: (state) => {
       state.loadingState = 'add message Failed';
     },
-    deleteCurrentUser: (state, action) => {
-      const { allDataUsers, allUsersId } = state;
-      const { currentUserId } = action.payload;
-      if (currentUserId !== 0) {
+    setNewCurrentUser: (state, action) => {
+      const { id } = action.payload;
+      if (state.currentUserId === id) {
+        state.currentUserId = -1;
+      } else {
+        state.currentUserId = id;
+      }
+    },
+    deleteCurrentUser: (state) => {
+      const { allDataUsers, allUsersId, currentUserId } = state;
+      if (currentUserId !== -1) {
         const newAllDataUsers = _.omit(allDataUsers, `${currentUserId}`);
         const newAllUsersId = allUsersId.filter((id) => id !== currentUserId);
         state.allDataUsers = newAllDataUsers;
         state.allUsersId = newAllUsersId;
       }
     },
-    deleteCurrentUserAllMessages: (state, action) => {
-      const { currentUserId } = action.payload;
-      state.allDataUsers[currentUserId].allMessages = [];
+    deleteCurrentUserAllMessages: (state) => {
+      const { currentUserId } = state;
+      if (currentUserId !== -1) {
+        state.allDataUsers[currentUserId].allMessages = [];
+      }
     },
   },
 });

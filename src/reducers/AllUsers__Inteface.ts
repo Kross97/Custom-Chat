@@ -5,6 +5,7 @@ export interface IStateAllUsers {
     [id: number]: IUser,
   },
   allUsersId: number[],
+  currentUserId: number,
   loadingState: string,
 }
 

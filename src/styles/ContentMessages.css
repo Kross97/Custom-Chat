@@ -92,11 +92,22 @@ margin-top: 5px;
 
 .menuAddition button {
   width: 100%;
-  padding: 0 0 0 0;
+  padding: 0 0px 12px 15px;
+  background-color: inherit;
+  border: none;
+  color: #fff;
+  font-size: 1.1em;
+  text-align: left;
+  cursor: pointer;
+}
+
+.menuAddition button:hover{
+  background-color: #2d4154;
 }
 
 .linkDeleteUser {
   width: 101%;
   display: inline-block;
   text-decoration: none;
+  color: #ffff;
 }

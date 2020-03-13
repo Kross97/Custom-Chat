@@ -17,22 +17,22 @@ export const addNewUser = (user: IUser): AppThunk => async (dispatch: StoreDispa
 
 export const deleteCurrentUser = (id: number): AppThunk => async (dispatch: StoreDispatch) => {
   try {
-    dispatch(allUsers.actions.deleteCurrentUser({ currentUserId: id }));
+    dispatch(allUsers.actions.deleteCurrentUser());
     await axios.delete(`http://localhost:3000/users/${id}`);
   } catch (e) {
-    console.log(e);
+    // console.log(e);
   }
 };
 
 export const deleteAllMessageUser = (id: number): AppThunk => async (dispatch: StoreDispatch) => {
   try {
-    dispatch(allUsers.actions.deleteCurrentUserAllMessages({ currentUserId: id }));
+    dispatch(allUsers.actions.deleteCurrentUserAllMessages());
     const responceUser = await axios.get(`http://localhost:3000/users/?id=${id}`);
     const userUpdated = { ...responceUser.data[0] };
     userUpdated.allMessages = [];
     await axios.patch(`http://localhost:3000/users/${id}`, userUpdated);
   } catch (e) {
-    console.log(e);
+    // console.log(e);
   }
 };
 
