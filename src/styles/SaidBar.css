@@ -34,7 +34,7 @@
   border: none;
   width: 10%;
   height: 34px;
-  cursor: pointer;
+  cursor: url('../img/icon-clicker.png') , pointer;
   margin-top: 6px;
 }
 
@@ -83,6 +83,9 @@ box-sizing: border-box;
 padding: 0;
 height: 88%;
 max-height: 88%;
+overflow: auto;
+scrollbar-width: thin;
+scrollbar-color: #4082bc #242f3d;
 }
 
 .imgUser {
@@ -90,13 +93,15 @@ max-height: 88%;
   border-radius: 45px;
   height: 68%;
   margin: 11px 0 0px 8px;
+  max-width: 64px;
+  max-height: 62px;
 }
 
 .UserContainer{
   position: relative;
   width: 100%;
   height: 92px;
-  cursor: pointer;
+  cursor: url('../img/icon-clicker.png') , pointer;
   display: flex;
   padding-left: 15px;
   box-sizing: border-box;
@@ -109,8 +114,8 @@ max-height: 88%;
 .UserContainer > div {
   width: 100%;
   height: 100%;
-  font-size: 1.4em;
-  cursor: pointer;
+  font-size: 1.2em;
+  cursor: url('../img/icon-clicker.png') , pointer;
   display: block;
   box-sizing: border-box;
   padding-left: 40px;
@@ -136,6 +141,18 @@ max-height: 88%;
   top: 0;
   right: 8px;
   color: #6c7883;
+  font-size: 0.8em;
+}
+
+.UserContainer > div span:nth-child(4){
+  position: absolute;
+  top: 52px;
+  right: 15px;
+  width: 7%;
+  height: 25%;
+  text-align: center;
+  border-radius: 13px;
+  background-color: #4082bc;
 }
 
 .UserContainerActive > div span:nth-child(2) {

@@ -15,6 +15,18 @@ export const addNewUser = (user: IUser): AppThunk => async (dispatch: StoreDispa
   }
 };
 
+export const setNewCurrentUser = (id: number): AppThunk => async (dispatch: StoreDispatch) => {
+  try {
+    dispatch(allUsers.actions.setNewCurrentUser({ id }));
+    const responceUser = await axios.get(`http://localhost:3000/users/?id=${id}`);
+    const userUpdated = { ...responceUser.data[0] };
+    userUpdated.notReadMessages = 0;
+    await axios.patch(`http://localhost:3000/users/${id}`, userUpdated);
+  } catch (e) {
+  //  console.log(e);
+  }
+};
+
 export const deleteCurrentUser = (id: number): AppThunk => async (dispatch: StoreDispatch) => {
   try {
     dispatch(allUsers.actions.deleteCurrentUser());
@@ -47,14 +59,33 @@ export const loadingAllUsers = (): AppThunk => async (dispatch: StoreDispatch) =
   }
 };
 
-export const addNewMessage = (message: IMessage): AppThunk => async (dispatch: StoreDispatch) => {
+export const loadingAudioSingl = (): AppThunk => async (dispatch: StoreDispatch) => {
+  dispatch(currentAudio.actions.addNewAudioRequest());
+  try {
+    const responceAudio = await axios.get('http://localhost:3000/audio');
+    dispatch(currentAudio.actions.addNewAudioSucces({ audio: responceAudio.data[0] }));
+  } catch {
+    dispatch(currentAudio.actions.addNewAudioFailed());
+  }
+};
+
+export const addNewMessage = (
+  message: IMessage, idCurrentUser: number,
+): AppThunk => async (dispatch: StoreDispatch) => {
   dispatch(allUsers.actions.addNewMessageRequest());
   try {
     dispatch(allUsers.actions.addNewMessageSucces({ message }));
     const responceUser = await axios.get(`http://localhost:3000/users/?id=${message.idUser}`);
     const userUpdated = { ...responceUser.data[0] };
     const messageForServer = _.omit(message, 'id');
+
     userUpdated.allMessages.push(messageForServer);
+    if (message.idUser !== idCurrentUser) {
+      const { notReadMessages } = userUpdated;
+      userUpdated.notReadMessages = notReadMessages + 1;
+    } else {
+      userUpdated.notReadMessages = 0;
+    }
     await axios.patch(`http://localhost:3000/users/${message.idUser}`, userUpdated);
   } catch (e) {
     dispatch(allUsers.actions.addNewMessageFailed());

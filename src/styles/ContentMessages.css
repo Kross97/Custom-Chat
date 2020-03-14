@@ -1,6 +1,6 @@
 .container {
   width: 74.8%;
-  height: 700px;
+  height: 945px;
   display: inline-block;
 }
 
@@ -9,10 +9,15 @@
   background-repeat: no-repeat;
   background-size: cover;
   width: 100%;
-  height: 91.3%;
-  max-height: 91.3%;
+  height: 92.5%;
+}
+
+.containerMessages > ul {
+  width: 100%;
+  height: 93%;
+  max-height: 93%;
   overflow: auto;
-  scrollbar-width: none;
+  scrollbar-width: thin;
 }
 
 
@@ -63,7 +68,7 @@ margin-top: 5px;
 }
 
 .btnMenu:hover {
-  cursor: pointer;
+  cursor: url('../img/icon-clicker.png') , pointer;
   background-color: #242f3d;
 }
 
@@ -98,7 +103,7 @@ margin-top: 5px;
   color: #fff;
   font-size: 1.1em;
   text-align: left;
-  cursor: pointer;
+  cursor: url('../img/icon-clicker.png') , pointer;
 }
 
 .menuAddition button:hover{

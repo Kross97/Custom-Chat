@@ -5,7 +5,7 @@ import _ from 'lodash';
 import faker from 'faker';
 import { Link } from 'react-router-dom';
 import cn from 'classnames';
-import { allUsers } from '../../reducers';
+// import { allUsers } from '../../reducers';
 import { IUserItemProps } from './Interface_Saidbar';
 import { IApplicationState } from '../../Global_Interface';
 import saidBar from '../../styles/SaidBar.css';
@@ -13,29 +13,20 @@ import * as actions from '../../actions';
 
 const actionCreators = {
   addNewMessage: actions.addNewMessage,
-  setNewCurrentUser: allUsers.actions.setNewCurrentUser,
+  setNewCurrentUser: actions.setNewCurrentUser,
 };
 
+const randomTimeForCreateMessage = [
+  500, 1000, 2500, 5000, 10000, 30000, 60000, 120000, 150000, 240000, 350000,
+];
 
-export const UserItem = (props: IUserItemProps) => {
+export const UserItem = React.memo((props: IUserItemProps) => {
   const { user } = props;
 
   const dispatch = useDispatch();
   const { addNewMessage, setNewCurrentUser } = bindActionCreators(actionCreators, dispatch);
 
-  const srcSingleAlert = useSelector(({ currentAudio: { currentAudio } }: IApplicationState) => {
-    if (currentAudio.length !== 0) {
-      return currentAudio[0].src;
-    }
-    return '#';
-  });
-
-  if (srcSingleAlert !== '#') {
-    const singleAlert = new Audio();
-    singleAlert.src = srcSingleAlert;
-    singleAlert.play();
-  }
-
+  const idCurrentUser = useSelector((state: IApplicationState) => state.allUsers.currentUserId);
 
   const createNewMessage = () => {
     const message = {
@@ -46,20 +37,21 @@ export const UserItem = (props: IUserItemProps) => {
       date: `${new Date()}`,
       value: faker.lorem.lines(),
     };
-    addNewMessage(message);
+    addNewMessage(message, idCurrentUser);
   };
 
+  const indexRandomTime = Math.floor(Math.random() * (10 - 0 + 1)) + 0;
+  const randomTime = randomTimeForCreateMessage[indexRandomTime];
+  console.log('Сообщение будет через: ', randomTime);
   useEffect(() => {
-    const idInterval = setInterval(createNewMessage, 10000);
+    const idInterval = setInterval(createNewMessage, randomTime);
     return () => {
       clearInterval(idInterval);
     };
-  }, []);
-
-  const idCurrentUser = useSelector((state: IApplicationState) => state.allUsers.currentUserId);
+  }, [randomTime]);
 
   const setCurrentUser = () => {
-    setNewCurrentUser({ id: user.id });
+    setNewCurrentUser(user.id);
   };
 
   let valueMessage = '';
@@ -67,8 +59,8 @@ export const UserItem = (props: IUserItemProps) => {
   if (user.allMessages.length !== 0) {
     const lastMessageUser = user.allMessages[user.allMessages.length - 1];
     const dateMessage = new Date(lastMessageUser.date);
-    const hourLastMessage: string = dateMessage.getHours() <= 9 ? `0${dateMessage.getHours()}` : `${dateMessage.getHours()}`;
-    const minuteLastMessage: string = dateMessage.getMinutes() <= 9 ? `0${dateMessage.getMinutes()}` : `${dateMessage.getMinutes()}`;
+    const hourLastMessage = dateMessage.getHours() <= 9 ? `0${dateMessage.getHours()}` : `${dateMessage.getHours()}`;
+    const minuteLastMessage = dateMessage.getMinutes() <= 9 ? `0${dateMessage.getMinutes()}` : `${dateMessage.getMinutes()}`;
     if (lastMessageUser.value.length < 27) {
       valueMessage = lastMessageUser.value;
     } else {
@@ -81,18 +73,22 @@ export const UserItem = (props: IUserItemProps) => {
     [saidBar.UserContainer]: true,
     [saidBar.UserContainerActive]: idCurrentUser === user.id,
   });
+  const countNotReadMessages = useSelector(
+    ({ allUsers: { allDataUsers } }: IApplicationState) => allDataUsers[user.id].notReadMessages,
+  );
 
   const returnPath = idCurrentUser === user.id ? '/' : `/dialog/:${user.id}`;
   return (
-    <Link to={returnPath}>
+    <Link to={returnPath} style={{ textDecoration: 'none' }}>
       <div onClick={setCurrentUser} className={styleUser} role="button" aria-hidden>
         <img className={saidBar.imgUser} src={user.imgSrc} alt="user" />
         <div>
           <span>{`${user.name}  ${user.surName}`}</span>
           <span>{dateLastMessage}</span>
           <article>{valueMessage}</article>
+          {countNotReadMessages !== 0 && <span>{countNotReadMessages}</span>}
         </div>
       </div>
     </Link>
   );
-};
+});

@@ -50,6 +50,12 @@ export const allUsers = createSlice({
     addNewMessageSucces: (state, action: PayloadAction<Users.IAddMessage>) => {
       const { message } = action.payload;
       state.allDataUsers[message.idUser].allMessages.push(message);
+      if (message.idUser !== state.currentUserId) {
+        const { notReadMessages } = state.allDataUsers[message.idUser];
+        state.allDataUsers[message.idUser].notReadMessages = notReadMessages + 1;
+      } else {
+        state.allDataUsers[message.idUser].notReadMessages = 0;
+      }
       state.loadingState = 'add message Succes';
     },
     addNewMessageFailed: (state) => {
@@ -62,6 +68,7 @@ export const allUsers = createSlice({
       } else {
         state.currentUserId = id;
       }
+      state.allDataUsers[id].notReadMessages = 0;
     },
     deleteCurrentUser: (state) => {
       const { allDataUsers, allUsersId, currentUserId } = state;
@@ -83,6 +90,7 @@ export const allUsers = createSlice({
 
 const currentAudioState: Audio.IStateCurrentAudio = {
   currentAudio: [],
+  isPlaySound: false,
   loadingState: '',
 };
 
@@ -96,9 +104,36 @@ export const currentAudio = createSlice({
     addNewAudioSucces: (state, action: PayloadAction<Audio.IAddAudio>) => {
       const { audio } = action.payload;
       state.currentAudio = [audio];
+      state.isPlaySound = true;
+      state.loadingState = 'add audio succes';
     },
     addNewAudioFailed: (state) => {
       state.loadingState = 'add audio request';
+    },
+    disconnectCurrentSingle: (state) => {
+      const { isPlaySound } = state;
+      if (state.currentAudio.length === 0) {
+        state.isPlaySound = false;
+      } else {
+        state.isPlaySound = !isPlaySound;
+      }
+    },
+  },
+});
+
+const actualUiMessagesState = {
+  countRow: 0,
+};
+
+export const actualUiMessages = createSlice({
+  name: 'actualUiMessages',
+  initialState: actualUiMessagesState,
+  reducers: {
+    setUiCountRows: (state, action) => {
+      const { count } = action.payload;
+      if (count <= 5) {
+        state.countRow = count;
+      }
     },
   },
 });
@@ -106,4 +141,5 @@ export const currentAudio = createSlice({
 export const reducer = combineReducers({
   allUsers: allUsers.reducer,
   currentAudio: currentAudio.reducer,
+  actualUiMessages: actualUiMessages.reducer,
 });

@@ -19,6 +19,8 @@ export interface IUser {
   name: string,
   surName: string,
   imgSrc: string,
+  notifications: boolean,
+  notReadMessages: number,
   allMessages: IMessage[],
 }
 

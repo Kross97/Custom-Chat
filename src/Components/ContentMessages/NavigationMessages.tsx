@@ -39,13 +39,13 @@ export const NavigationMessages = () => {
   };
 
   return (
-    <div className={dialog.containerNav}>
+    <nav className={dialog.containerNav}>
       <div>zzz</div>
       <section className={styleMenu}>
         <button onClick={deleteAllMessage} disabled={currentUserId === -1} type="button">Удалить переписку</button>
         <button onClick={deleteUser} disabled={currentUserId === -1} type="button"><Link className={dialog.linkDeleteUser} to="/">Удалить собеседника</Link></button>
       </section>
       <button onClick={showMenu} type="button" aria-label="menu" className={dialog.btnMenu} />
-    </div>
+    </nav>
   );
 };

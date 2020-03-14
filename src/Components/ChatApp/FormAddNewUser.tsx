@@ -34,13 +34,13 @@ export const FormAddNewUser = (props: IFormAddNewUser) => {
   }
 
   const changeName = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-   if (!validInputsSymbol.has(target.value[target.value.length - 1])) {
+   if (!validInputsSymbol.has(target.value[target.value.length - 1]) && target.value.length <= 10) {
      setName(target.value);
    }
   }
 
   const changeSurname = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-   if (!validInputsSymbol.has(target.value[target.value.length - 1])) {
+   if (!validInputsSymbol.has(target.value[target.value.length - 1]) && target.value.length <= 10) {
      setSurName(target.value);
    }
   }
@@ -51,8 +51,10 @@ export const FormAddNewUser = (props: IFormAddNewUser) => {
    event.preventDefault();
    const user = {
      id: Number(_.uniqueId()),
-     name,
-     surName,
+     name: _.capitalize(name),
+     surName: _.capitalize(surName),
+     notifications: true,
+     notReadMessages: 0,
      imgSrc,
      allMessages: [],
    }
@@ -83,7 +85,7 @@ export const FormAddNewUser = (props: IFormAddNewUser) => {
       </div>
       <div className={chatApp.dataForm}>
         <div className={chatApp.dataInputs}>
-           <input onChange={changeName} type="text" max="11" placeholder="Введите имя" value={name} />
+           <input onChange={changeName} autoFocus type="text" placeholder="Введите имя" value={name} />
            <input onChange={changeSurname} type="text" placeholder="Введите фамилию" value={surName} />
          </div>
          <div className={chatApp.dataBtns}>
