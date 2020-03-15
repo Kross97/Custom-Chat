@@ -8,7 +8,7 @@ import cn from 'classnames';
 // import { allUsers } from '../../reducers';
 import { IUserItemProps } from './Interface_Saidbar';
 import { IApplicationState } from '../../Global_Interface';
-import saidBar from '../../styles/SaidBar.css';
+import userStyle from '../../styles/SaidBarUsers/UserItem.css';
 import * as actions from '../../actions';
 
 const actionCreators = {
@@ -30,11 +30,11 @@ export const UserItem = React.memo((props: IUserItemProps) => {
 
   const createNewMessage = () => {
     const message = {
-      id: Number(_.uniqueId()),
+      id: Date.parse(`${new Date()}`) + Number(_.uniqueId()),
       idUser: user.id,
-      idMainUser: 'Boss',
+      idMainUser: 'none',
       type: 'text',
-      date: `${new Date()}`,
+      date: Date.parse(`${new Date()}`),
       value: faker.lorem.lines(),
     };
     addNewMessage(message, idCurrentUser);
@@ -42,7 +42,7 @@ export const UserItem = React.memo((props: IUserItemProps) => {
 
   const indexRandomTime = Math.floor(Math.random() * (10 - 0 + 1)) + 0;
   const randomTime = randomTimeForCreateMessage[indexRandomTime];
-  console.log('Сообщение будет через: ', randomTime);
+  console.log('Для:', user.name, 'Сообщение будет через: ', randomTime);
   useEffect(() => {
     const idInterval = setInterval(createNewMessage, randomTime);
     return () => {
@@ -70,8 +70,8 @@ export const UserItem = React.memo((props: IUserItemProps) => {
   }
 
   const styleUser = cn({
-    [saidBar.UserContainer]: true,
-    [saidBar.UserContainerActive]: idCurrentUser === user.id,
+    [userStyle.UserContainer]: true,
+    [userStyle.UserContainerActive]: idCurrentUser === user.id,
   });
   const countNotReadMessages = useSelector(
     ({ allUsers: { allDataUsers } }: IApplicationState) => allDataUsers[user.id].notReadMessages,
@@ -81,7 +81,7 @@ export const UserItem = React.memo((props: IUserItemProps) => {
   return (
     <Link to={returnPath} style={{ textDecoration: 'none' }}>
       <div onClick={setCurrentUser} className={styleUser} role="button" aria-hidden>
-        <img className={saidBar.imgUser} src={user.imgSrc} alt="user" />
+        <img className={userStyle.imgUser} src={user.imgSrc} alt="user" />
         <div>
           <span>{`${user.name}  ${user.surName}`}</span>
           <span>{dateLastMessage}</span>

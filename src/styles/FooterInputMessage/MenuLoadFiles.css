@@ -1,0 +1,31 @@
+.menuLoadFilesHide {
+  transition: 0.5s ease-in-out;
+  background-color: #17212b;
+  width: 18%;
+  height: 1px;
+  position: absolute;
+  bottom: 62px;
+  left: 28px;
+  z-index: -1;
+}
+
+
+/*.menuLoadFilesHide input {
+  width: 100%;
+  height: 40px;
+  position: relative;
+  background-color: inherit;
+  border: none;
+  color: #6C7883;
+  font-size: 1.2em;
+}
+*/
+
+.menuLoadFilesShow {
+    height: 225px;
+    z-index: 1;
+}
+
+.menuLoadFilesShow button {
+  display: block;
+}

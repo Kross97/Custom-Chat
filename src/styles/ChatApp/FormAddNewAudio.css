@@ -1,0 +1,55 @@
+.blockBackground {
+  width: 100%;
+  height: 1000px;
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #606060;
+  opacity: 0.8;
+}
+
+.formAddUser {
+  background-color: #17212b;
+  position: absolute;
+  z-index: 2;
+  top: 25%;
+  left: 25%;
+  width: 50%;
+  height: 400px;
+
+}
+
+.customInput {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 45px;
+  padding-left: 35px;
+  padding-top: 12px;
+  margin-left: 20px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+  background-color: #17212b;
+  border: 1px solid #506375;
+  color: #636f7a;
+  font-size: 16px;
+  border-radius: 5px;
+  top: 177px;
+  right: 5px;
+  cursor: url('../../img/icon-clicker.png') , pointer;
+}
+
+.customInput:hover {
+  border: 3px solid #4082bc;
+}
+
+.customInputPlus {
+  background-image: url('../../img/plus.png');
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 12%;
+  height: 100%;
+}

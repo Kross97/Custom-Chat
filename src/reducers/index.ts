@@ -1,13 +1,14 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, combineReducers, PayloadAction } from '@reduxjs/toolkit';
 import _ from 'lodash';
-// import { IMessage } from '../../Global_Interface';
+import { IMessage } from '../Global_Interface';
 import * as Users from './AllUsers__Inteface';
 import * as Audio from './CurrentAudio_interface';
 
 const allUsersState: Users.IStateAllUsers = {
   allDataUsers: {},
   allUsersId: [],
+  allMessageForDelete: [],
   currentUserId: -1,
   loadingState: '',
 };
@@ -36,7 +37,9 @@ export const allUsers = createSlice({
       const usersId = users.map((user) => user.id);
       state.allUsersId = usersId;
       users.forEach((user) => {
-        user.allMessages.forEach((message) => ({ id: _.uniqueId(), ...message }));
+        if (state.currentUserId === user.id) {
+          user.notReadMessages = 0;
+        }
         state.allDataUsers[user.id] = user;
       });
       state.loadingState = 'loading users Succes';
@@ -61,6 +64,23 @@ export const allUsers = createSlice({
     addNewMessageFailed: (state) => {
       state.loadingState = 'add message Failed';
     },
+    addMessageForDeleteList: (state, action) => {
+      const { id } = action.payload;
+      state.allMessageForDelete.push(id);
+    },
+    removeMessageOfDeleteList: (state, action) => {
+      const { id } = action.payload;
+      state.allMessageForDelete = state.allMessageForDelete.filter((dateMes) => dateMes !== id);
+    },
+    deleteAllMessagesSelected: (state, action) => {
+      const { currentUserId } = state;
+      const { idMessages } = action.payload;
+      const { allMessages } = state.allDataUsers[currentUserId];
+      state.allDataUsers[currentUserId].allMessages = allMessages.filter(
+        (message: IMessage) => !idMessages.has(message.id),
+      );
+      state.allMessageForDelete = [];
+    },
     setNewCurrentUser: (state, action) => {
       const { id } = action.payload;
       if (state.currentUserId === id) {
@@ -69,6 +89,7 @@ export const allUsers = createSlice({
         state.currentUserId = id;
       }
       state.allDataUsers[id].notReadMessages = 0;
+      state.allMessageForDelete = [];
     },
     deleteCurrentUser: (state) => {
       const { allDataUsers, allUsersId, currentUserId } = state;

@@ -1,50 +1,3 @@
-.container {
-  width: 74.8%;
-  height: 945px;
-  display: inline-block;
-}
-
-.containerMessages {
-  background-image: url('../img/fonDialog.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 100%;
-  height: 92.5%;
-}
-
-.containerMessages > ul {
-  width: 100%;
-  height: 93%;
-  max-height: 93%;
-  overflow: auto;
-  scrollbar-width: thin;
-}
-
-
-/* ITEM MESSAGE */
-
-.containerItemMessage {
-max-width: 35%;
-background-color: #17212b;
-color: #fff;
-padding: 25px 45px 30px 47px;
-margin: 20px 15px 15px 25px;
-border-radius: 82px 15px 15px 0px;
-clear: both;
-float: left;
-position: relative;
-}
-
-.dateMessage {
-  color: #6c7883;
-  position: absolute;
-  bottom: 10px;
-  right: 14px;
-  font-size: 1em;
-}
-
-/* NAVIGATION MESSAGES */
-
 .containerNav {
   width: 100%;
   height: 60px;
@@ -56,7 +9,7 @@ position: relative;
 .btnMenu {
 width: 4.5%;
 height: 85%;
-background-image: url('../img/menu.png');
+background-image: url('../../img/menu.png');
 background-repeat: no-repeat;
 background-size: auto;
 background-color: initial;
@@ -68,7 +21,7 @@ margin-top: 5px;
 }
 
 .btnMenu:hover {
-  cursor: url('../img/icon-clicker.png') , pointer;
+  cursor: url('../../img/icon-clicker.png') , pointer;
   background-color: #242f3d;
 }
 
@@ -103,16 +56,24 @@ margin-top: 5px;
   color: #fff;
   font-size: 1.1em;
   text-align: left;
-  cursor: url('../img/icon-clicker.png') , pointer;
+  cursor: url('../../img/icon-clicker.png') , pointer;
 }
 
 .menuAddition button:hover{
   background-color: #2d4154;
 }
 
+.menuAddition .btnDisabled {
+  background-color: #2f3e50;
+  color: #88898a;
+  cursor: auto;
+}
+
+
 .linkDeleteUser {
   width: 101%;
   display: inline-block;
   text-decoration: none;
-  color: #ffff;
+  color: inherit;
+  cursor: inherit;
 }

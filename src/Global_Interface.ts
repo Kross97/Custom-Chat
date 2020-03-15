@@ -10,7 +10,7 @@ export interface IMessage {
   idUser: number,
   idMainUser: string,
   type: string,
-  date: string,
+  date: number,
   value: string,
 }
 

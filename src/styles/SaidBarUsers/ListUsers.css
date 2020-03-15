@@ -1,0 +1,10 @@
+.listUsers {
+width: 100%;
+box-sizing: border-box;
+padding: 0;
+height: 88%;
+max-height: 88%;
+overflow: auto;
+scrollbar-width: thin;
+scrollbar-color: #4082bc #242f3d;
+}

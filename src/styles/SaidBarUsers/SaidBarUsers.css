@@ -1,0 +1,6 @@
+.container {
+  border-right: 3px solid #1f202c;
+  width: 25%;
+  height: 1000px;
+  display: inline-block;
+}

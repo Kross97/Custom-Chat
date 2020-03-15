@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { useDispatch, useSelector } from 'react-redux';
 import cn from 'classnames';
 import { currentAudio } from '../../reducers';
-import saidBar from '../../styles/SaidBar.css';
+import navStyle from '../../styles/SaidBarUsers/Navigation.css';
 import { INavigationProps } from './Interface_Saidbar';
 import { IApplicationState } from '../../Global_Interface';
 
@@ -29,21 +29,21 @@ export const Navigation = (props: INavigationProps) => {
   };
 
   const styleShowMenu = cn({
-    [saidBar.menuAddition]: true,
-    [saidBar.showMenu]: isShowMenu === 'show',
+    [navStyle.menuAddition]: true,
+    [navStyle.showMenu]: isShowMenu === 'show',
   });
   const { showFormAddUser, showFormAddAudio } = props;
   const textBtnControlSingle = isPlaySound ? 'Отключить звук уведомлений' : 'Включить звук уведомлений';
   return (
-    <nav className={saidBar.navContainer}>
-      <button onClick={showMenu} aria-label="showMenu" type="button" className={saidBar.btnMainMenu} />
+    <nav className={navStyle.navContainer}>
+      <button onClick={showMenu} aria-label="showMenu" type="button" className={navStyle.btnMainMenu} />
       <div className={styleShowMenu}>
-        <button onClick={showFormAddUser} className={saidBar.btnShowMenu} type="button">Добавить собеседника</button>
-        <button className={saidBar.btnShowMenu} type="button">Настроить профиль</button>
-        <button onClick={showFormAddAudio} className={saidBar.btnShowMenu} type="button">Добавить звук уведомлений</button>
-        <button onClick={disconnectSingle} className={saidBar.btnShowMenu} type="button">{textBtnControlSingle}</button>
+        <button onClick={showFormAddUser} className={navStyle.btnShowMenu} type="button">Добавить собеседника</button>
+        <button className={navStyle.btnShowMenu} type="button">Настроить профиль</button>
+        <button onClick={showFormAddAudio} className={navStyle.btnShowMenu} type="button">Добавить звук уведомлений</button>
+        <button onClick={disconnectSingle} className={navStyle.btnShowMenu} type="button">{textBtnControlSingle}</button>
       </div>
-      <input className={saidBar.search} type="text" placeholder="Search" />
+      <input className={navStyle.search} type="text" placeholder="Search" />
     </nav>
   );
 };

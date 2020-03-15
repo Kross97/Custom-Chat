@@ -2,11 +2,14 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import cn from 'classnames';
+import _ from 'lodash';
+import { MenuLoadFiles } from './MenuLoadFiles';
 import { actualUiMessages } from '../../reducers';
-import inputMes from '../../styles/FooterInputMessage.css';
+import footerStyle from '../../styles/FooterInputMessage/FooterInputMessage.css';
 import { IApplicationState } from '../../Global_Interface';
+import * as actions from '../../actions';
 
-const countSymbolsInRow = 48;
+const countSymbolsInRow = 47;
 
 const discoverHeightFooter = (count: number) => {
   let heightFooter = '';
@@ -34,6 +37,7 @@ const discoverHeightFooter = (count: number) => {
 
 const actionCreators = {
   setUiCountRows: actualUiMessages.actions.setUiCountRows,
+  addNewMessage: actions.addNewMessage,
 };
 
 export const FooterInputMessage = () => {
@@ -41,11 +45,26 @@ export const FooterInputMessage = () => {
   const [valueMessage, setValueMessage] = useState<string>('');
 
   const dispatch = useDispatch();
-  const { setUiCountRows } = bindActionCreators(actionCreators, dispatch);
+  const { setUiCountRows, addNewMessage } = bindActionCreators(actionCreators, dispatch);
 
   const showMenuLoadFiles = () => {
     const isShowMenuLoadCurrent = isShowMenuLoad === 'hidden' ? 'show' : 'hidden';
     setIsShowMenuLoad(isShowMenuLoadCurrent);
+  };
+
+  const idCurrentUser = useSelector(({ allUsers }: IApplicationState) => allUsers.currentUserId);
+
+  const submitMessage = () => {
+    const message = {
+      id: Date.parse(`${new Date()}`) + Number(_.uniqueId()),
+      idUser: idCurrentUser,
+      idMainUser: 'Master',
+      type: 'text',
+      date: Date.parse(`${new Date()}`),
+      value: valueMessage,
+    };
+    addNewMessage(message, idCurrentUser);
+    setValueMessage('');
   };
 
   const inputMessage = ({ target } : React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -61,17 +80,17 @@ export const FooterInputMessage = () => {
   const valueHeight = discoverHeightFooter(actualCountRow);
 
   const styleBtnClip = cn({
-    [inputMes.btnClip]: true,
-    [inputMes.btnClipClick]: isShowMenuLoad === 'show',
+    [footerStyle.btnClip]: true,
+    [footerStyle.btnClipClick]: isShowMenuLoad === 'show',
   });
 
   return (
-    <footer className={inputMes.container} style={{ height: valueHeight }}>
-      <form className={inputMes.formAddMessage}>
-        <div className={inputMes.menuLoadFiles} />
+    <footer className={footerStyle.container} style={{ height: valueHeight }}>
+      <form onSubmit={submitMessage} className={footerStyle.formAddMessage}>
+        <MenuLoadFiles isShowMenuLoad={isShowMenuLoad} />
         <button onClick={showMenuLoadFiles} className={styleBtnClip} aria-label="showMenu" type="button" />
         <textarea onChange={inputMessage} spellCheck="false" placeholder=" Write a message..." value={valueMessage} />
-        <button className={inputMes.btnAddNewMessage} />
+        <button className={footerStyle.btnAddNewMessage} aria-label="showMenu" type="submit" />
       </form>
     </footer>
   );

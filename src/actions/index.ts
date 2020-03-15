@@ -48,6 +48,22 @@ export const deleteAllMessageUser = (id: number): AppThunk => async (dispatch: S
   }
 };
 
+export const deleteAllSeletedMessage = (
+  id: number, idMessages: Set<number>,
+): AppThunk => async (dispatch: StoreDispatch) => {
+  try {
+    dispatch(allUsers.actions.deleteAllMessagesSelected({ idMessages }));
+    const responceUser = await axios.get(`http://localhost:3000/users/?id=${id}`);
+    const userUpdated = { ...responceUser.data[0] };
+    userUpdated.allMessages = userUpdated.allMessages.filter(
+      (message: IMessage) => !idMessages.has(message.id),
+    );
+    await axios.patch(`http://localhost:3000/users/${id}`, userUpdated);
+  } catch (e) {
+    // console.log(e);
+  }
+};
+
 export const loadingAllUsers = (): AppThunk => async (dispatch: StoreDispatch) => {
   dispatch(allUsers.actions.loadingUsersFromServerRequest());
   try {
@@ -77,9 +93,8 @@ export const addNewMessage = (
     dispatch(allUsers.actions.addNewMessageSucces({ message }));
     const responceUser = await axios.get(`http://localhost:3000/users/?id=${message.idUser}`);
     const userUpdated = { ...responceUser.data[0] };
-    const messageForServer = _.omit(message, 'id');
 
-    userUpdated.allMessages.push(messageForServer);
+    userUpdated.allMessages.push(message);
     if (message.idUser !== idCurrentUser) {
       const { notReadMessages } = userUpdated;
       userUpdated.notReadMessages = notReadMessages + 1;

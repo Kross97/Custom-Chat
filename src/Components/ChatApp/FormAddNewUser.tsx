@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React, { useState } from 'react';
-import chatApp from '../../styles/ChatApp.css';
+import addUserStyle from '../../styles/ChatApp/FormAddNewUser.css';
 import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { IFormAddNewUser } from './Interface_Chat';
@@ -68,27 +68,27 @@ export const FormAddNewUser = (props: IFormAddNewUser) => {
 
   return (
   <>
-    <div onClick={showFormAddUser} className={chatApp.blockBackground} />
-      <form onSubmit={addUser} className={chatApp.formAddUser}>
-      <div className={chatApp.dataImage}>
+    <div onClick={showFormAddUser} className={addUserStyle.blockBackground} />
+      <form onSubmit={addUser} className={addUserStyle.formAddUser}>
+      <div className={addUserStyle.dataImage}>
       <img src={imgSrc} alt="фотография собеседника" />
-      <div className={chatApp.imageAdd}>
+      <div className={addUserStyle.imageAdd}>
         <img src={imgSrc} alt="фото" />
           <label>
-            <div className={chatApp.customInput}>
+            <div className={addUserStyle.customInput}>
             Загрузите фото
-            <div className={chatApp.customInputPlus} />
+            <div className={addUserStyle.customInputPlus} />
             </div>
             <input onChange={getImgSrc} type="file" accept="image/*" />
           </label>
         </div>
       </div>
-      <div className={chatApp.dataForm}>
-        <div className={chatApp.dataInputs}>
+      <div className={addUserStyle.dataForm}>
+        <div className={addUserStyle.dataInputs}>
            <input onChange={changeName} autoFocus type="text" placeholder="Введите имя" value={name} />
            <input onChange={changeSurname} type="text" placeholder="Введите фамилию" value={surName} />
          </div>
-         <div className={chatApp.dataBtns}>
+         <div className={addUserStyle.dataBtns}>
            <button type="submit">Сохранить</button>
            <button onClick={showFormAddUser} type="button">Отменить</button>
         </div>

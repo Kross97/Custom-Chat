@@ -1,0 +1,19 @@
+@font-face {
+  font-family: "Roboto-Medium";
+  src: url("../../fonts/Roboto-Medium.ttf");
+  font-style: normal;
+  font-weight: normal;
+}
+
+.container {
+  width: 100%;
+  height: 1000PX;
+  background-color: #17212b;
+  margin: 0 auto;
+  position: relative;
+  display: flex;
+  font-family: "Roboto-Medium";
+  justify-content: space-between;
+  flex-wrap: wrap;
+  line-height: 21px;
+}

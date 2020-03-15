@@ -1,26 +1,3 @@
-@font-face {
-  font-family: "Roboto-Regular";
-  src: url("../fonts/Roboto-Regular.ttf");
-  font-style: normal;
-  font-weight: normal;
-}
-
-.container {
-  width: 100%;
-  height: 1000PX;
-  background-color: #17212b;
-  margin: 0 auto;
-  position: relative;
-  display: flex;
-  font-family: "Roboto-Regular";
-  justify-content: space-between;
-  flex-wrap: wrap;
-  line-height: 21px;
-}
-
-
-/* FORM ADD USER*/
-
 .blockBackground {
   width: 100%;
   height: 1000px;
@@ -74,7 +51,7 @@
 .dataInputs input:focus {
   border: 3px solid #4082bc;
   box-sizing: border-box;
-  cursor: url('../img/icon-clicker.png') , pointer;
+  cursor: url('../../img/icon-clicker.png') , pointer;
 }
 
 .dataBtns {
@@ -97,7 +74,7 @@
 .dataBtns button:hover {
   border: 3px solid #4082bc;
   box-sizing: border-box;
-  cursor: url('../img/icon-clicker.png') , pointer;
+  cursor: url('../../img/icon-clicker.png') , pointer;
 }
 
 .dataImage {
@@ -155,7 +132,7 @@
   border-radius: 5px;
   top: 177px;
   right: 5px;
-  cursor: url('../img/icon-clicker.png') , pointer;
+  cursor: url('../../img/icon-clicker.png') , pointer;
 }
 
 .customInput:hover {
@@ -163,7 +140,7 @@
 }
 
 .customInputPlus {
-  background-image: url('../img/plus.png');
+  background-image: url('../../img/plus.png');
   background-repeat: no-repeat;
   position: absolute;
   top: 5px;

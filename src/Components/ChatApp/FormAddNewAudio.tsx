@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import _ from 'lodash';
-import chatApp from '../../styles/ChatApp.css';
+import audioStyle from '../../styles/ChatApp/FormAddNewAudio.css';
 import { IFormAddNewAudio } from './Interface_Chat';
 import * as actions from '../../actions';
 
@@ -41,12 +41,12 @@ export const FormAddNewAudio = (props: IFormAddNewAudio) => {
   }
   return (
     <>
-       <div onClick={showFormAddAudio} className={chatApp.blockBackground} />
-        <form onSubmit={addAudio} className={chatApp.formAddUser}>
+       <div onClick={showFormAddAudio} className={audioStyle.blockBackground} />
+        <form onSubmit={addAudio} className={audioStyle.formAddUser}>
             <label>
-              <div className={chatApp.customInput}>
+              <div className={audioStyle.customInput}>
               Загрузите аудио
-              <div className={chatApp.customInputPlus} />
+              <div className={audioStyle.customInputPlus} />
               </div>
               <input onChange={getAudioSrc} type="file" accept="audio/*" />
             </label>

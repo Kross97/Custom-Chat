@@ -23,17 +23,20 @@
   font-size: 1.5em;
   color: #6C7883;
   height: 100%;
+  scrollbar-width: thin;
+  scrollbar-color: #4082bc #242f3d;
 }
 
 .btnClip {
   flex-basis: 3%;
-  background-image: url('../img/icon - paper-clip.png');
+  background-image: url('../../img/icon - paper-clip.png');
   background-repeat: no-repeat;
   background-size: auto;
   height: 25px;
   border: none;
   background-color: #17212b;
-  cursor: url('../img/icon-clicker.png') , pointer;
+  cursor: url('../../img/icon-clicker.png') , pointer;
+  margin-bottom: 8px;
 }
 
 .btnClipClick {
@@ -42,19 +45,12 @@
 
 .btnAddNewMessage {
   flex-basis: 3%;
-  background-image: url('../img/icon- sending.png');
+  background-image: url('../../img/icon- sending.png');
   background-repeat: no-repeat;
   background-size: auto;
   height: 25px;
   border: none;
   background-color: #17212b;
-  cursor: url('../img/icon-clicker.png') , pointer;
-}
-
-.menuLoadFiles {
-  width: 18%;
-  height: 7%;
-  position: absolute;
-  bottom: 41px;
-  left: 28px;
+  cursor: url('../../img/icon-clicker.png') , pointer;
+  margin-bottom: 6px;
 }

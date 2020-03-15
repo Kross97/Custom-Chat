@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { bindActionCreators } from 'redux';
 import { useSelector, useDispatch } from 'react-redux';
 import { IApplicationState } from '../../Global_Interface';
-import saidBar from '../../styles/SaidBar.css';
+import listStyle from '../../styles/SaidBarUsers/ListUsers.css';
 import { UserItem } from './UserItem';
 import * as actions from '../../actions';
 
@@ -22,7 +22,7 @@ export const ListUsers = () => {
   }, [allUsers.length]);
 
   return (
-    <ul className={saidBar.listUsers}>
+    <ul className={listStyle.listUsers}>
       {allUsers.length !== 0 && allUsers.map((user) => (
         <UserItem key={user.id} user={user} />
       ))}

@@ -6,6 +6,7 @@ export interface IStateAllUsers {
   },
   allUsersId: number[],
   currentUserId: number,
+  allMessageForDelete: number[],
   loadingState: string,
 }
 

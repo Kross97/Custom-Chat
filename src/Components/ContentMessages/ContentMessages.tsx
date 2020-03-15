@@ -1,8 +1,8 @@
 import React, { useEffect, useMemo } from 'react';
 import { useSelector, shallowEqual } from 'react-redux';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import { NavigationMessages } from './NavigationMessages';
-import dialog from '../../styles/ContentMessages.css';
+import messagesStyle from '../../styles/ContentMessages/ContentMessages.css';
 import { IApplicationState } from '../../Global_Interface';
 
 const Dialog = React.lazy(() => import('./Dialog'));
@@ -40,12 +40,13 @@ export const ContentMessages = () => {
   }, [allMesagesLength]);
 
   return (
-    <div className={dialog.container}>
+    <div className={messagesStyle.container}>
       <NavigationMessages />
       <Switch>
-        <React.Suspense fallback={<div className={dialog.containerMessages} />}>
+        <React.Suspense fallback={<div className={messagesStyle.containerMessages} />}>
           <Route exact path="/" component={DefaultWindowDialog} />
           <Route path="/dialog/:id" component={Dialog} />
+          <Redirect to="/" />
         </React.Suspense>
       </Switch>
     </div>

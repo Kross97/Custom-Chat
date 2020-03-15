@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { bindActionCreators } from 'redux';
 import { useDispatch } from 'react-redux';
-import { SaidBarUsers } from '../SaidBarUsers/SaidBar';
-import chatApp from '../../styles/ChatApp.css';
+import { SaidBarUsers } from '../SaidBarUsers/SaidBarUsers';
+import chatApp from '../../styles/ChatApp/ChatApp.css';
 import { FormAddNewUser } from './FormAddNewUser';
 import { FormAddNewAudio } from './FormAddNewAudio';
 import { ContentMessages } from '../ContentMessages/ContentMessages';
 import { FooterInputMessage } from '../FooterInputMessage/FooterInputMessage';
-
 import * as actions from '../../actions';
 
 const actionCreators = {

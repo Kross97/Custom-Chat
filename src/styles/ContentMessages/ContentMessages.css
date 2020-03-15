@@ -1,0 +1,13 @@
+.container {
+  width: 74.8%;
+  height: 945px;
+  display: inline-block;
+}
+
+.containerMessages {
+  background-image: url('../../img/fonDialog.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 92.5%;
+}

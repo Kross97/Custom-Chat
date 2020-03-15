@@ -1,0 +1,73 @@
+.imgUser {
+  width: 20%;
+  border-radius: 45px;
+  height: 68%;
+  margin: 11px 0 0px 8px;
+  max-width: 64px;
+  max-height: 62px;
+}
+
+.UserContainer{
+  position: relative;
+  width: 100%;
+  height: 92px;
+  cursor: url('../../img/icon-clicker.png') , pointer;
+  display: flex;
+  padding-left: 15px;
+  box-sizing: border-box;
+}
+
+.UserContainerActive {
+  background-color: #4082bc;
+}
+
+.UserContainer > div {
+  width: 100%;
+  height: 100%;
+  font-size: 1.2em;
+  cursor: url('../../img/icon-clicker.png') , pointer;
+  display: block;
+  box-sizing: border-box;
+  padding-left: 40px;
+  padding-top: 5px;
+  position: relative;
+  color: #fff;
+  text-decoration: none;
+}
+
+.UserContainer > div > article {
+  color: #67737e;
+  font-size: 0.8em;
+  position: absolute;
+  bottom: 18px;
+}
+
+.UserContainerActive > div > article {
+  color: #ffffff;
+}
+
+.UserContainer > div span:nth-child(2) {
+  position: absolute;
+  top: 0;
+  right: 8px;
+  color: #6c7883;
+  font-size: 0.8em;
+}
+
+.UserContainer > div span:nth-child(4){
+  position: absolute;
+  top: 52px;
+  right: 15px;
+  width: 8%;
+  height: 28%;
+  text-align: center;
+  border-radius: 13px;
+  background-color: #4082bc;
+  padding-top: 3px;
+  box-sizing: border-box;
+  font-size: 0.8em;
+}
+
+.UserContainerActive > div span:nth-child(2) {
+  color: #ffff;
+}
