@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import cn from 'classnames';
 import _ from 'lodash';
 import { MenuLoadFiles } from './MenuLoadFiles';
-import { actualUiMessages } from '../../reducers';
+import { actualUiApplication } from '../../reducers';
 import footerStyle from '../../styles/FooterInputMessage/FooterInputMessage.css';
 import { IApplicationState } from '../../Global_Interface';
 import * as actions from '../../actions';
@@ -36,7 +36,7 @@ const discoverHeightFooter = (count: number) => {
 };
 
 const actionCreators = {
-  setUiCountRows: actualUiMessages.actions.setUiCountRows,
+  setUiCountRows: actualUiApplication.actions.setUiCountRows,
   addNewMessage: actions.addNewMessage,
 };
 
@@ -65,6 +65,7 @@ export const FooterInputMessage = () => {
     };
     addNewMessage(message, idCurrentUser);
     setValueMessage('');
+    setUiCountRows({ count: 0 });
   };
 
   const inputMessage = ({ target } : React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -75,7 +76,9 @@ export const FooterInputMessage = () => {
     }
   };
 
-  const actualCountRow = useSelector((state: IApplicationState) => state.actualUiMessages.countRow);
+  const actualCountRow = useSelector(
+    (state: IApplicationState) => state.actualUiApplication.countRow,
+  );
 
   const valueHeight = discoverHeightFooter(actualCountRow);
 
@@ -88,9 +91,9 @@ export const FooterInputMessage = () => {
     <footer className={footerStyle.container} style={{ height: valueHeight }}>
       <form onSubmit={submitMessage} className={footerStyle.formAddMessage}>
         <MenuLoadFiles isShowMenuLoad={isShowMenuLoad} />
-        <button onClick={showMenuLoadFiles} className={styleBtnClip} aria-label="showMenu" type="button" />
-        <textarea onChange={inputMessage} spellCheck="false" placeholder=" Write a message..." value={valueMessage} />
-        <button className={footerStyle.btnAddNewMessage} aria-label="showMenu" type="submit" />
+        <button onClick={showMenuLoadFiles} className={styleBtnClip} disabled={idCurrentUser === -1} aria-label="showMenu" type="button" />
+        <textarea onChange={inputMessage} spellCheck="false" disabled={idCurrentUser === -1} placeholder=" Write a message..." value={valueMessage} />
+        <button className={footerStyle.btnAddNewMessage} disabled={idCurrentUser === -1} aria-label="showMenu" type="submit" />
       </form>
     </footer>
   );

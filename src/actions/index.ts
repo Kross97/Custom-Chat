@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import axios from 'axios';
 import _ from 'lodash';
 import { allUsers, currentAudio } from '../reducers';
@@ -24,6 +25,21 @@ export const setNewCurrentUser = (id: number): AppThunk => async (dispatch: Stor
     await axios.patch(`http://localhost:3000/users/${id}`, userUpdated);
   } catch (e) {
   //  console.log(e);
+  }
+};
+
+export const changeNotificationsUser = (
+  id: number,
+): AppThunk => async (dispatch: StoreDispatch) => {
+  try {
+    dispatch(allUsers.actions.changeNotificationsUser());
+    const responceUser = await axios.get(`http://localhost:3000/users/?id=${id}`);
+    const userUpdated: IUser = { ...responceUser.data[0] };
+    const { notifications } = userUpdated;
+    userUpdated.notifications = !notifications;
+    await axios.patch(`http://localhost:3000/users/${id}`, userUpdated);
+  } catch (e) {
+    // console.log(e);
   }
 };
 
@@ -64,13 +80,41 @@ export const deleteAllSeletedMessage = (
   }
 };
 
+export const increaseCountMessagesUser = (
+  id: number, factor: number,
+): AppThunk => async (dispatch: StoreDispatch) => {
+  dispatch(allUsers.actions.addNewFlowMessagesUserRequest());
+  try {
+    const countLoadingMessages = 7;
+    let message = '';
+    const responceUser = await axios.get(`http://localhost:3000/users/?id=${id}`);
+    const user: IUser = { ...responceUser.data[0] };
+    const allUserMessages = user.allMessages.length;
+    const newFlowMessages = user.allMessages.slice(
+      allUserMessages - 1 - (factor * countLoadingMessages),
+    );
+    if (newFlowMessages.length === allUserMessages) {
+      message = 'all flow loaded';
+    }
+    dispatch(allUsers.actions.addNewFlowMessagesUserSucces({ newFlowMessages, message }));
+  } catch (e) {
+    dispatch(allUsers.actions.addNewFlowMessagesUserFailed());
+  }
+};
+
 export const loadingAllUsers = (): AppThunk => async (dispatch: StoreDispatch) => {
   dispatch(allUsers.actions.loadingUsersFromServerRequest());
   try {
     const responceUsers = await axios.get('http://localhost:3000/users');
-    // сделать обработку на 10 сообщений
+    // Оптимизировать перебор
+    responceUsers.data.forEach((user: IUser) => {
+      const { allMessages } = user;
+      const countMessageForChat = 10;
+      user.allMessages = allMessages.slice(allMessages.length - 1 - countMessageForChat);
+      return user;
+    });
     dispatch(allUsers.actions.loadingUsersFromServerSucces({ users: responceUsers.data }));
-  } catch {
+  } catch (e) {
     dispatch(allUsers.actions.loadingUsersFromServerFailed());
   }
 };

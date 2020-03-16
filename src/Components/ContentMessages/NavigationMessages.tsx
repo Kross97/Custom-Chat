@@ -11,6 +11,7 @@ const aactionCreators = {
   deleteCurrentUser: actions.deleteCurrentUser,
   deleteAllMessageUser: actions.deleteAllMessageUser,
   deleteAllSeletedMessage: actions.deleteAllSeletedMessage,
+  changeNotificationsUser: actions.changeNotificationsUser,
 };
 
 export const NavigationMessages = () => {
@@ -21,9 +22,17 @@ export const NavigationMessages = () => {
     deleteCurrentUser,
     deleteAllMessageUser,
     deleteAllSeletedMessage,
+    changeNotificationsUser,
   } = bindActionCreators(aactionCreators, dispatch);
 
-  const currentUserId = useSelector((state: IApplicationState) => state.allUsers.currentUserId);
+  const { currentIdUser, user } = useSelector(
+    ({ allUsers: { allDataUsers, currentUserId } }: IApplicationState) => (
+      {
+        currentIdUser: currentUserId,
+        user: allDataUsers[currentUserId],
+      }),
+  );
+
   const lengthMessagesDeleted = useSelector(
     (state: IApplicationState) => state.allUsers.allMessageForDelete.length,
   );
@@ -39,11 +48,11 @@ export const NavigationMessages = () => {
   });
 
   const deleteUser = () => {
-    deleteCurrentUser(currentUserId);
+    deleteCurrentUser(currentIdUser);
   };
 
   const deleteAllMessage = () => {
-    deleteAllMessageUser(currentUserId);
+    deleteAllMessageUser(currentIdUser);
   };
 
   const allMesagesSelected = useSelector(
@@ -51,21 +60,28 @@ export const NavigationMessages = () => {
   );
 
   const deleteSelectedMessage = () => {
-    deleteAllSeletedMessage(currentUserId, new Set(allMesagesSelected));
+    deleteAllSeletedMessage(currentIdUser, new Set(allMesagesSelected));
   };
 
-  const styleBtnMenu = cn({ [navStyle.btnDisabled]: currentUserId === -1 });
+  const changeStateNotifications = () => {
+    changeNotificationsUser(currentIdUser);
+  };
+
+  const styleBtnMenu = cn({ [navStyle.btnDisabled]: currentIdUser === -1 });
   const styleBtnDeleteSelectedMessage = cn({
-    [navStyle.btnDisabled]: currentUserId === -1 || lengthMessagesDeleted === 0,
+    [navStyle.btnDisabled]: currentIdUser === -1 || lengthMessagesDeleted === 0,
   });
+
+  const textBtnNotification = user == undefined || user.notifications ? 'Disable notifications' : 'Enable notifications';
 
   return (
     <nav className={navStyle.containerNav}>
       <div>zzz</div>
       <section className={styleMenu}>
-        <button onClick={deleteAllMessage} className={styleBtnMenu} disabled={currentUserId === -1} type="button">Удалить переписку</button>
-        <button onClick={deleteUser} className={styleBtnMenu} disabled={currentUserId === -1} type="button"><Link className={navStyle.linkDeleteUser} to="/">Удалить собеседника</Link></button>
-        <button onClick={deleteSelectedMessage} className={styleBtnDeleteSelectedMessage} disabled={currentUserId === -1} type="button">Удалить выбранные сообщения</button>
+        <button onClick={deleteAllMessage} className={styleBtnMenu} disabled={currentIdUser === -1} type="button">Удалить переписку</button>
+        <button onClick={deleteUser} className={styleBtnMenu} disabled={currentIdUser === -1} type="button"><Link className={navStyle.linkDeleteUser} to="/">Удалить собеседника</Link></button>
+        <button onClick={deleteSelectedMessage} className={styleBtnDeleteSelectedMessage} disabled={currentIdUser === -1} type="button">Удалить выбранные сообщения</button>
+        <button onClick={changeStateNotifications} className={styleBtnMenu} disabled={currentIdUser === -1} type="button">{textBtnNotification}</button>
       </section>
       <button onClick={showMenu} type="button" aria-label="menu" className={navStyle.btnMenu} />
     </nav>

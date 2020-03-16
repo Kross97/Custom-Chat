@@ -11,6 +11,7 @@ const allUsersState: Users.IStateAllUsers = {
   allMessageForDelete: [],
   currentUserId: -1,
   loadingState: '',
+  loadingFlowMessageState: '',
 };
 
 export const allUsers = createSlice({
@@ -47,6 +48,11 @@ export const allUsers = createSlice({
     loadingUsersFromServerFailed: (state) => {
       state.loadingState = 'loading users Failed';
     },
+    changeNotificationsUser: (state) => {
+      const { currentUserId } = state;
+      const { notifications } = state.allDataUsers[currentUserId];
+      state.allDataUsers[currentUserId].notifications = !notifications;
+    },
     addNewMessageRequest: (state) => {
       state.loadingState = 'add message Request';
     },
@@ -63,6 +69,18 @@ export const allUsers = createSlice({
     },
     addNewMessageFailed: (state) => {
       state.loadingState = 'add message Failed';
+    },
+    addNewFlowMessagesUserRequest: (state) => {
+      state.loadingFlowMessageState = 'loading messages';
+    },
+    addNewFlowMessagesUserSucces: (state, action) => {
+      const { newFlowMessages, message } = action.payload;
+      const { currentUserId } = state;
+      state.allDataUsers[currentUserId].allMessages = newFlowMessages;
+      state.loadingFlowMessageState = message;
+    },
+    addNewFlowMessagesUserFailed: (state) => {
+      state.loadingFlowMessageState = 'loading error';
     },
     addMessageForDeleteList: (state, action) => {
       const { id } = action.payload;
@@ -83,11 +101,7 @@ export const allUsers = createSlice({
     },
     setNewCurrentUser: (state, action) => {
       const { id } = action.payload;
-      if (state.currentUserId === id) {
-        state.currentUserId = -1;
-      } else {
-        state.currentUserId = id;
-      }
+      state.currentUserId = state.currentUserId === id ? -1 : id;
       state.allDataUsers[id].notReadMessages = 0;
       state.allMessageForDelete = [];
     },
@@ -142,13 +156,14 @@ export const currentAudio = createSlice({
   },
 });
 
-const actualUiMessagesState = {
+const actualUiApplicationState = {
   countRow: 0,
+  searchValue: '',
 };
 
-export const actualUiMessages = createSlice({
+export const actualUiApplication = createSlice({
   name: 'actualUiMessages',
-  initialState: actualUiMessagesState,
+  initialState: actualUiApplicationState,
   reducers: {
     setUiCountRows: (state, action) => {
       const { count } = action.payload;
@@ -156,11 +171,15 @@ export const actualUiMessages = createSlice({
         state.countRow = count;
       }
     },
+    setSearchValue: (state, action) => {
+      const { search } = action.payload;
+      state.searchValue = search;
+    },
   },
 });
 
 export const reducer = combineReducers({
   allUsers: allUsers.reducer,
   currentAudio: currentAudio.reducer,
-  actualUiMessages: actualUiMessages.reducer,
+  actualUiApplication: actualUiApplication.reducer,
 });

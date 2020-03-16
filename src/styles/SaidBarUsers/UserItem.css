@@ -42,8 +42,18 @@
   bottom: 18px;
 }
 
+.UserContainer > div > article > span {
+  font-size: 1.1em;
+  color: #4082bc;
+}
+
 .UserContainerActive > div > article {
   color: #ffffff;
+}
+
+.UserContainerActive > div > article > span {
+  font-size: 1.1em;
+  color: #030303;
 }
 
 .UserContainer > div span:nth-child(2) {

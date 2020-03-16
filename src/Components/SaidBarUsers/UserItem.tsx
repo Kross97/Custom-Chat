@@ -1,71 +1,50 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { bindActionCreators } from 'redux';
 import { useDispatch, useSelector } from 'react-redux';
-import _ from 'lodash';
-import faker from 'faker';
 import { Link } from 'react-router-dom';
 import cn from 'classnames';
 // import { allUsers } from '../../reducers';
+import { UsertItemNotifications } from './UsertItemNotifications';
 import { IUserItemProps } from './Interface_Saidbar';
 import { IApplicationState } from '../../Global_Interface';
 import userStyle from '../../styles/SaidBarUsers/UserItem.css';
 import * as actions from '../../actions';
 
 const actionCreators = {
-  addNewMessage: actions.addNewMessage,
   setNewCurrentUser: actions.setNewCurrentUser,
 };
 
-const randomTimeForCreateMessage = [
-  500, 1000, 2500, 5000, 10000, 30000, 60000, 120000, 150000, 240000, 350000,
-];
-
 export const UserItem = React.memo((props: IUserItemProps) => {
-  const { user } = props;
-
-  const dispatch = useDispatch();
-  const { addNewMessage, setNewCurrentUser } = bindActionCreators(actionCreators, dispatch);
+  const { user, message, option } = props;
 
   const idCurrentUser = useSelector((state: IApplicationState) => state.allUsers.currentUserId);
 
-  const createNewMessage = () => {
-    const message = {
-      id: Date.parse(`${new Date()}`) + Number(_.uniqueId()),
-      idUser: user.id,
-      idMainUser: 'none',
-      type: 'text',
-      date: Date.parse(`${new Date()}`),
-      value: faker.lorem.lines(),
-    };
-    addNewMessage(message, idCurrentUser);
-  };
-
-  const indexRandomTime = Math.floor(Math.random() * (10 - 0 + 1)) + 0;
-  const randomTime = randomTimeForCreateMessage[indexRandomTime];
-  console.log('Для:', user.name, 'Сообщение будет через: ', randomTime);
-  useEffect(() => {
-    const idInterval = setInterval(createNewMessage, randomTime);
-    return () => {
-      clearInterval(idInterval);
-    };
-  }, [randomTime]);
+  const dispatch = useDispatch();
+  const { setNewCurrentUser } = bindActionCreators(actionCreators, dispatch);
 
   const setCurrentUser = () => {
     setNewCurrentUser(user.id);
   };
 
-  let valueMessage = '';
+  let valueMessage: JSX.Element = <></>;
   let dateLastMessage = '';
   if (user.allMessages.length !== 0) {
-    const lastMessageUser = user.allMessages[user.allMessages.length - 1];
-    const dateMessage = new Date(lastMessageUser.date);
+    let buidValueMessage: JSX.Element;
+    const dateMessage = new Date(message.date);
     const hourLastMessage = dateMessage.getHours() <= 9 ? `0${dateMessage.getHours()}` : `${dateMessage.getHours()}`;
     const minuteLastMessage = dateMessage.getMinutes() <= 9 ? `0${dateMessage.getMinutes()}` : `${dateMessage.getMinutes()}`;
-    if (lastMessageUser.value.length < 27) {
-      valueMessage = lastMessageUser.value;
+    if (message.value.length < 25) {
+      buidValueMessage = <>lastMessageUser.value</>;
     } else {
-      valueMessage = `${lastMessageUser.value.substring(0, 26)}...`;
+      buidValueMessage = <>{`${message.value.substring(0, 24)}...`}</>;
     }
+    valueMessage = message.idMainUser == 'Master' ? (
+      <>
+        <span>You: </span>
+        buidValueMessage
+      </>
+    ) : buidValueMessage;
+
     dateLastMessage = `${hourLastMessage}:${minuteLastMessage}`;
   }
 
@@ -73,9 +52,6 @@ export const UserItem = React.memo((props: IUserItemProps) => {
     [userStyle.UserContainer]: true,
     [userStyle.UserContainerActive]: idCurrentUser === user.id,
   });
-  const countNotReadMessages = useSelector(
-    ({ allUsers: { allDataUsers } }: IApplicationState) => allDataUsers[user.id].notReadMessages,
-  );
 
   const returnPath = idCurrentUser === user.id ? '/' : `/dialog/:${user.id}`;
   return (
@@ -86,7 +62,7 @@ export const UserItem = React.memo((props: IUserItemProps) => {
           <span>{`${user.name}  ${user.surName}`}</span>
           <span>{dateLastMessage}</span>
           <article>{valueMessage}</article>
-          {countNotReadMessages !== 0 && <span>{countNotReadMessages}</span>}
+          { option === 'create message' && <UsertItemNotifications notifications={user.notifications} userId={user.id} />}
         </div>
       </div>
     </Link>

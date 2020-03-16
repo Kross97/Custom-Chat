@@ -8,6 +8,11 @@ export interface IDialog {
   }
 }
 
+
 export interface IItemMessageProps {
   message: IMessage,
+}
+
+export interface ILoading {
+  stateLoading: string,
 }

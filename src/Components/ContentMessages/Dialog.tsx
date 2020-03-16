@@ -1,16 +1,17 @@
-import React, { useEffect } from 'react';
+/* eslint-disable no-param-reassign */
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { allUsers } from '../../reducers';
 import dialog from '../../styles/ContentMessages/Dialog.css';
 import { IApplicationState } from '../../Global_Interface';
+import { IdentifierLoading } from './IdentifierLoading';
 import { ItemMessage } from './ItemMessage';
 import { IDialog } from './ContentMessage_Interface';
 import * as actions from '../../actions';
 
 const actionCreators = {
   loadingAllUsers: actions.loadingAllUsers,
-  setNewCurrentUser: allUsers.actions.setNewCurrentUser,
+  increaseCountMessagesUser: actions.increaseCountMessagesUser,
 };
 
 const discoverHeightMessageContainer = (count: number) => {
@@ -38,12 +39,19 @@ const discoverHeightMessageContainer = (count: number) => {
 };
 
 export default React.memo((props: IDialog) => {
+  const [factorIncreaseMessages, setFactorIncreaseMessages] = useState<number>(1);
   const { match: { params: { id } } } = props;
 
   const dispatch = useDispatch();
-  const { loadingAllUsers } = bindActionCreators(actionCreators, dispatch);
+  const {
+    loadingAllUsers,
+    increaseCountMessagesUser,
+  } = bindActionCreators(actionCreators, dispatch);
 
   const allUsersList = useSelector(({ allUsers: { allUsersId } }: IApplicationState) => allUsersId);
+  const stateLoadingFlowMessages = useSelector(
+    ({ allUsers }: IApplicationState) => allUsers.loadingFlowMessageState,
+  );
 
   useEffect(() => {
     loadingAllUsers();
@@ -58,14 +66,24 @@ export default React.memo((props: IDialog) => {
     (currentIdUser !== -1 && allDataUsers[currentIdUser]
       ? allDataUsers[currentIdUser].allMessages : [])));
 
+  const scrollDialog = ({ currentTarget }: React.UIEvent<HTMLUListElement>) => {
+    if (currentTarget.scrollTop == 0 && stateLoadingFlowMessages !== 'all flow loaded') {
+      currentTarget.scrollTop = 50;
+      const newFactorIncreaseMessages = factorIncreaseMessages + 1;
+      setFactorIncreaseMessages(newFactorIncreaseMessages);
+      increaseCountMessagesUser(currentIdUser, factorIncreaseMessages);
+    }
+  };
+
   const countRow = useSelector(
-    ({ actualUiMessages }: IApplicationState) => actualUiMessages.countRow,
+    ({ actualUiApplication }: IApplicationState) => actualUiApplication.countRow,
   );
   const heightMessageContainer = discoverHeightMessageContainer(countRow);
 
   return (
     <main className={dialog.containerMessages} style={{ height: heightMessageContainer }}>
-      <ul>
+      <ul onScroll={scrollDialog}>
+        { (stateLoadingFlowMessages === 'loading messages' || stateLoadingFlowMessages === 'loading error') && <IdentifierLoading stateLoading={stateLoadingFlowMessages} />}
         {messagesUser.length !== 0 && messagesUser.map((message) => (
           <ItemMessage
             key={message.id}

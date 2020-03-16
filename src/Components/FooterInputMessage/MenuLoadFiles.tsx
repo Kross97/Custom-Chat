@@ -48,9 +48,15 @@ export const MenuLoadFiles = (props: IMenuLoadFilesProps) => {
   });
   return (
     <div className={styleMenuLoadFile}>
-      <input onChange={addFileToMessage('image')} multiple type="file" accept="image/*" />
-      <input onChange={addFileToMessage('audio')} type="file" accept="audio/*" />
-      <input onChange={addFileToMessage('video')} type="file" accept="video/*" />
+      <label>
+        <input onChange={addFileToMessage('image')} multiple type="file" accept="image/*" />
+      </label>
+      <label>
+        <input onChange={addFileToMessage('audio')} type="file" accept="audio/*" />
+      </label>
+      <label>
+        <input onChange={addFileToMessage('video')} type="file" accept="video/*" />
+      </label>
     </div>
   );
 };

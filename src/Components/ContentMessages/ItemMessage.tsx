@@ -14,7 +14,7 @@ const createValueMessage = (type: string, value: string, viewImage: viewImage) =
     case 'text':
       return <span>{value}</span>;
     case 'image':
-      return <img className={itemMessage.imgValue} onClick={viewImage} src={value} alt="фото" />;
+      return <img className={itemMessage.imgValue} onClick={viewImage} src={value} alt="фото" aria-hidden />;
     case 'audio':
       return <audio controls src={value} muted />;
     default:
@@ -73,8 +73,8 @@ export const ItemMessage = (props: IItemMessageProps) => {
   const valueMessage = createValueMessage(message.type, message.value, viewImage);
   return (
     <>
-      {isShowImage === 'show' && (<div onClick={viewImage} className={itemMessage.backgroundImg} />)}
-      {isShowImage === 'show' && (<img onClick={viewImage} className={itemMessage.imgView} src={message.value} alt="foto" />)}
+      {isShowImage === 'show' && (<div onClick={viewImage} className={itemMessage.backgroundImg} aria-hidden />)}
+      {isShowImage === 'show' && (<img onClick={viewImage} className={itemMessage.imgView} src={message.value} alt="foto" aria-hidden />)}
       <article
         onClick={deleteItemMessage(message.id)}
         className={styleArticle}
