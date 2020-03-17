@@ -16,9 +16,9 @@ export const addNewUser = (user: IUser): AppThunk => async (dispatch: StoreDispa
   }
 };
 
-export const setNewCurrentUser = (id: number): AppThunk => async (dispatch: StoreDispatch) => {
+export const zeroingNewMessagesUser = (id: number): AppThunk => async (dispatch: StoreDispatch) => {
   try {
-    dispatch(allUsers.actions.setNewCurrentUser({ id }));
+    dispatch(allUsers.actions.zeroingNewMessagesUser({ id }));
     const responceUser = await axios.get(`http://localhost:3000/users/?id=${id}`);
     const userUpdated = { ...responceUser.data[0] };
     userUpdated.notReadMessages = 0;
@@ -56,8 +56,9 @@ export const deleteAllMessageUser = (id: number): AppThunk => async (dispatch: S
   try {
     dispatch(allUsers.actions.deleteCurrentUserAllMessages());
     const responceUser = await axios.get(`http://localhost:3000/users/?id=${id}`);
-    const userUpdated = { ...responceUser.data[0] };
+    const userUpdated: IUser = { ...responceUser.data[0] };
     userUpdated.allMessages = [];
+    userUpdated.notReadMessages = 0;
     await axios.patch(`http://localhost:3000/users/${id}`, userUpdated);
   } catch (e) {
     // console.log(e);
@@ -80,6 +81,7 @@ export const deleteAllSeletedMessage = (
   }
 };
 
+// ПОСТОЯННАЯ ЗАГРУЗКА
 export const increaseCountMessagesUser = (
   id: number, factor: number,
 ): AppThunk => async (dispatch: StoreDispatch) => {
@@ -90,9 +92,10 @@ export const increaseCountMessagesUser = (
     const responceUser = await axios.get(`http://localhost:3000/users/?id=${id}`);
     const user: IUser = { ...responceUser.data[0] };
     const allUserMessages = user.allMessages.length;
-    const newFlowMessages = user.allMessages.slice(
-      allUserMessages - 1 - (factor * countLoadingMessages),
-    );
+    const newRangeMessages = allUserMessages - 1 - (factor * countLoadingMessages);
+    const startIndexMessages = newRangeMessages < 0 ? 0 : newRangeMessages;
+
+    const newFlowMessages = user.allMessages.slice(startIndexMessages);
     if (newFlowMessages.length === allUserMessages) {
       message = 'all flow loaded';
     }
@@ -129,22 +132,15 @@ export const loadingAudioSingl = (): AppThunk => async (dispatch: StoreDispatch)
   }
 };
 
-export const addNewMessage = (
-  message: IMessage, idCurrentUser: number,
-): AppThunk => async (dispatch: StoreDispatch) => {
+export const addNewMessage = (message: IMessage): AppThunk => async (dispatch: StoreDispatch) => {
   dispatch(allUsers.actions.addNewMessageRequest());
   try {
     dispatch(allUsers.actions.addNewMessageSucces({ message }));
     const responceUser = await axios.get(`http://localhost:3000/users/?id=${message.idUser}`);
     const userUpdated = { ...responceUser.data[0] };
-
     userUpdated.allMessages.push(message);
-    if (message.idUser !== idCurrentUser) {
-      const { notReadMessages } = userUpdated;
-      userUpdated.notReadMessages = notReadMessages + 1;
-    } else {
-      userUpdated.notReadMessages = 0;
-    }
+    const { notReadMessages } = userUpdated;
+    userUpdated.notReadMessages = message.idMainUser === 'Master' ? notReadMessages : notReadMessages + 1;
     await axios.patch(`http://localhost:3000/users/${message.idUser}`, userUpdated);
   } catch (e) {
     dispatch(allUsers.actions.addNewMessageFailed());

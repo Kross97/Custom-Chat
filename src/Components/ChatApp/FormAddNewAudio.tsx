@@ -12,7 +12,7 @@ const actionCreators = {
   addNewAudio : actions.addNewAudio,
 }
 
-export const FormAddNewAudio = (props: IFormAddNewAudio) => {
+export default (props: IFormAddNewAudio) => {
   const [audioSrc, setAudioSrc] = useState<string>('');
 
   const { showFormAddAudio } = props;
@@ -38,20 +38,24 @@ export const FormAddNewAudio = (props: IFormAddNewAudio) => {
       src: audioSrc,
     };
     addNewAudio(audio);
+    showFormAddAudio();
   }
   return (
     <>
        <div onClick={showFormAddAudio} className={audioStyle.blockBackground} />
-        <form onSubmit={addAudio} className={audioStyle.formAddUser}>
-            <label>
+        <form onSubmit={addAudio} className={audioStyle.formAddAudio}>
+         <label>
+          <div className={audioStyle.imgAudio}/>
               <div className={audioStyle.customInput}>
               Загрузите аудио
               <div className={audioStyle.customInputPlus} />
               </div>
               <input onChange={getAudioSrc} type="file" accept="audio/*" />
             </label>
+            <div className={audioStyle.btnGroup}>
           <button type="submit">Сохранить</button>
           <button onClick={showFormAddAudio} type="button">Отменить</button>
+          </div>
         </form>
  </>
  );

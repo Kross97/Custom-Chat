@@ -3,11 +3,12 @@ import { bindActionCreators } from 'redux';
 import { useDispatch } from 'react-redux';
 import { SaidBarUsers } from '../SaidBarUsers/SaidBarUsers';
 import chatApp from '../../styles/ChatApp/ChatApp.css';
-import { FormAddNewUser } from './FormAddNewUser';
-import { FormAddNewAudio } from './FormAddNewAudio';
 import { ContentMessages } from '../ContentMessages/ContentMessages';
 import { FooterInputMessage } from '../FooterInputMessage/FooterInputMessage';
 import * as actions from '../../actions';
+
+const FormAddNewUser = React.lazy(() => import('./FormAddNewUser'));
+const FormAddNewAudio = React.lazy(() => import('./FormAddNewAudio'));
 
 const actionCreators = {
   loadingAudioSingl: actions.loadingAudioSingl,
@@ -39,8 +40,10 @@ export const ChatApplication = () => {
       <SaidBarUsers showFormAddAudio={showFormAddAudio} showFormAddUser={showFormAddUser} />
       <ContentMessages />
       <FooterInputMessage />
-      {isShowFormAddUser === 'show' && <FormAddNewUser showFormAddUser={showFormAddUser} />}
-      {isShowFormAddAudio === 'show' && <FormAddNewAudio showFormAddAudio={showFormAddAudio} />}
+      <React.Suspense fallback={<div>Загрузка...</div>}>
+        {isShowFormAddUser === 'show' && <FormAddNewUser showFormAddUser={showFormAddUser} />}
+        {isShowFormAddAudio === 'show' && <FormAddNewAudio showFormAddAudio={showFormAddAudio} />}
+      </React.Suspense>
     </main>
   );
 };

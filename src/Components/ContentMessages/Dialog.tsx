@@ -12,6 +12,7 @@ import * as actions from '../../actions';
 const actionCreators = {
   loadingAllUsers: actions.loadingAllUsers,
   increaseCountMessagesUser: actions.increaseCountMessagesUser,
+  zeroingNewMessagesUser: actions.zeroingNewMessagesUser,
 };
 
 const discoverHeightMessageContainer = (count: number) => {
@@ -40,12 +41,15 @@ const discoverHeightMessageContainer = (count: number) => {
 
 export default React.memo((props: IDialog) => {
   const [factorIncreaseMessages, setFactorIncreaseMessages] = useState<number>(1);
+  const [controlScroll, setControlScroll] = useState<string>('none');
+
   const { match: { params: { id } } } = props;
 
   const dispatch = useDispatch();
   const {
     loadingAllUsers,
     increaseCountMessagesUser,
+    zeroingNewMessagesUser,
   } = bindActionCreators(actionCreators, dispatch);
 
   const allUsersList = useSelector(({ allUsers: { allUsersId } }: IApplicationState) => allUsersId);
@@ -64,7 +68,16 @@ export default React.memo((props: IDialog) => {
 
   const messagesUser = useSelector(({ allUsers: { allDataUsers } }: IApplicationState) => (
     (currentIdUser !== -1 && allDataUsers[currentIdUser]
-      ? allDataUsers[currentIdUser].allMessages : [])));
+      ? allDataUsers[currentIdUser].allMessages : [])
+  ));
+
+  const notReadMessages = useSelector(({ allUsers: { allDataUsers } }: IApplicationState) => (
+    currentIdUser !== -1 && allDataUsers[currentIdUser]
+      ? allDataUsers[currentIdUser].notReadMessages : 1));
+
+  useEffect(() => {
+    setControlScroll('none');
+  }, [notReadMessages]);
 
   const scrollDialog = ({ currentTarget }: React.UIEvent<HTMLUListElement>) => {
     if (currentTarget.scrollTop == 0 && stateLoadingFlowMessages !== 'all flow loaded') {
@@ -72,6 +85,15 @@ export default React.memo((props: IDialog) => {
       const newFactorIncreaseMessages = factorIncreaseMessages + 1;
       setFactorIncreaseMessages(newFactorIncreaseMessages);
       increaseCountMessagesUser(currentIdUser, factorIncreaseMessages);
+    }
+    if ((currentTarget.scrollHeight - currentTarget.scrollTop) === currentTarget.clientHeight) {
+      zeroingNewMessagesUser(currentIdUser);
+    }
+    if (controlScroll === 'none') {
+      const newScrollPosition = (
+        currentTarget.scrollHeight / messagesUser.length) * notReadMessages;
+      currentTarget.scrollTop = (currentTarget.scrollTop - newScrollPosition) < 0 ? 3 : currentTarget.scrollTop - newScrollPosition;
+      setControlScroll('control');
     }
   };
 

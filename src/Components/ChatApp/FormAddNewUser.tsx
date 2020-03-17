@@ -13,7 +13,7 @@ const actionCreators = {
   addNewUser: actions.addNewUser,
 }
 
-export const FormAddNewUser = (props: IFormAddNewUser) => {
+export default (props: IFormAddNewUser) => {
   const [imgSrc, setImgSrc] = useState<string>('#');
   const [name, setName] = useState<string>('');
   const [surName, setSurName] = useState<string>('');

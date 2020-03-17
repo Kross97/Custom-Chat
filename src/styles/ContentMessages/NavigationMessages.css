@@ -77,3 +77,24 @@ margin-top: 5px;
   color: inherit;
   cursor: inherit;
 }
+
+/* IDENTIFINIER USER*/
+.userContainer > img {
+  display: none;
+}
+
+.userContainer {
+  flex-basis: 23%;
+  height: auto;
+  margin-left: 20px;
+  text-align: left;
+}
+
+.userContainer span:nth-child(2) {
+  color: #fff;
+  display: block;
+}
+
+.userContainer span:nth-child(3) {
+  color: #6c7883;
+}

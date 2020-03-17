@@ -39,6 +39,10 @@
   margin-bottom: 8px;
 }
 
+.btnClipDisable {
+  cursor: auto;
+}
+
 .btnClipClick {
   transform: matrix(0, -1, -1, 0, 0, 0);
 }
@@ -53,4 +57,8 @@
   background-color: #17212b;
   cursor: url('../../img/icon-clicker.png') , pointer;
   margin-bottom: 6px;
+}
+
+.btnAddNewMessageDisable{
+  cursor: auto;
 }

@@ -9,21 +9,27 @@
   opacity: 0.8;
 }
 
-.formAddUser {
+.formAddAudio {
   background-color: #17212b;
   position: absolute;
   z-index: 2;
   top: 25%;
   left: 25%;
-  width: 50%;
-  height: 400px;
+  width: 44%;
+  height: 23%;
+  border-radius: 44px;
+}
 
+.formAddAudio > label > input {
+  position: absolute;
+  top: 33%;
+  left: 26%;
 }
 
 .customInput {
   position: absolute;
   z-index: 1;
-  width: 100%;
+  width: 80%;
   height: 45px;
   padding-left: 35px;
   padding-top: 12px;
@@ -33,10 +39,10 @@
   background-color: #17212b;
   border: 1px solid #506375;
   color: #636f7a;
-  font-size: 16px;
+  font-size: 1.2em;
   border-radius: 5px;
-  top: 177px;
-  right: 5px;
+  top: 60px;
+  right: 45px;
   cursor: url('../../img/icon-clicker.png') , pointer;
 }
 
@@ -52,4 +58,44 @@
   right: 5px;
   width: 12%;
   height: 100%;
+}
+
+.imgAudio {
+  background-image: url('../../img/audio.png');
+  width: 5%;
+  height: 16%;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 29%;
+  left: 4%;
+  background-size: contain;
+  cursor: url('../../img/icon-clicker.png') , pointer;
+}
+
+/* BUTTONS */
+
+.btnGroup{
+  width: 75%;
+  position: absolute;
+  top: 60%;
+  left: 13%;
+  height: 32%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.btnGroup button{
+  width: 46%;
+  height: 60px;
+  background-color: #17212b;
+  border: 1px solid #506375;
+  color: #636f7a;
+  border-radius: 30px;
+  font-size: 1.1em;
+}
+
+.btnGroup button:hover {
+  border: 3px solid #4082bc;
+  box-sizing: border-box;
+  cursor: url('../../img/icon-clicker.png') , pointer;
 }

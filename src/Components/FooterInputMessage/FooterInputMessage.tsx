@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import cn from 'classnames';
@@ -54,6 +54,12 @@ export const FooterInputMessage = () => {
 
   const idCurrentUser = useSelector(({ allUsers }: IApplicationState) => allUsers.currentUserId);
 
+  useEffect(() => {
+    if (idCurrentUser === -1) {
+      setIsShowMenuLoad('hidden');
+    }
+  }, [idCurrentUser]);
+
   const submitMessage = () => {
     const message = {
       id: Date.parse(`${new Date()}`) + Number(_.uniqueId()),
@@ -63,7 +69,7 @@ export const FooterInputMessage = () => {
       date: Date.parse(`${new Date()}`),
       value: valueMessage,
     };
-    addNewMessage(message, idCurrentUser);
+    addNewMessage(message);
     setValueMessage('');
     setUiCountRows({ count: 0 });
   };
@@ -84,7 +90,13 @@ export const FooterInputMessage = () => {
 
   const styleBtnClip = cn({
     [footerStyle.btnClip]: true,
+    [footerStyle.btnClipDisable]: idCurrentUser === -1,
     [footerStyle.btnClipClick]: isShowMenuLoad === 'show',
+  });
+
+  const styleBtnAddMessage = cn({
+    [footerStyle.btnAddNewMessage]: true,
+    [footerStyle.btnAddNewMessageDisable]: valueMessage.length === 0,
   });
 
   return (
@@ -93,7 +105,7 @@ export const FooterInputMessage = () => {
         <MenuLoadFiles isShowMenuLoad={isShowMenuLoad} />
         <button onClick={showMenuLoadFiles} className={styleBtnClip} disabled={idCurrentUser === -1} aria-label="showMenu" type="button" />
         <textarea onChange={inputMessage} spellCheck="false" disabled={idCurrentUser === -1} placeholder=" Write a message..." value={valueMessage} />
-        <button className={footerStyle.btnAddNewMessage} disabled={idCurrentUser === -1} aria-label="showMenu" type="submit" />
+        <button className={styleBtnAddMessage} disabled={idCurrentUser === -1 || valueMessage.length === 0} aria-label="showMenu" type="submit" />
       </form>
     </footer>
   );

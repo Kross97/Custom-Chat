@@ -74,7 +74,11 @@ export const ItemMessage = (props: IItemMessageProps) => {
   return (
     <>
       {isShowImage === 'show' && (<div onClick={viewImage} className={itemMessage.backgroundImg} aria-hidden />)}
-      {isShowImage === 'show' && (<img onClick={viewImage} className={itemMessage.imgView} src={message.value} alt="foto" aria-hidden />)}
+      {isShowImage === 'show' && (
+        <div onClick={viewImage} className={itemMessage.imageContainer} aria-hidden>
+          <img onClick={viewImage} className={itemMessage.imgView} src={message.value} alt="foto" aria-hidden />
+        </div>
+      )}
       <article
         onClick={deleteItemMessage(message.id)}
         className={styleArticle}

@@ -6,8 +6,23 @@ import { HashRouter } from 'react-router-dom';
 import { ChatApplication } from './Components/ChatApp/ChatApplication';
 import { reducer } from './reducers';
 
+
+const { location } = window;
+const indexIdUser = location.hash.indexOf(':') + 1;
+const idUserInURl = Number(location.hash.slice(indexIdUser));
+const currentUserId = idUserInURl ? Number(location.hash.slice(indexIdUser)) : -1;
+
+
 export const store = configureStore({
   reducer,
+  preloadedState: {
+    allUsers: {
+      allDataUsers: {},
+      allUsersId: [],
+      allMessageForDelete: [],
+      currentUserId,
+    },
+  },
 });
 
 ReactDOM.render(

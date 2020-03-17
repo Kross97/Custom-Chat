@@ -8,3 +8,18 @@ overflow: auto;
 scrollbar-width: thin;
 scrollbar-color: #4082bc #242f3d;
 }
+
+.afterSearch {
+  height: auto;
+  max-height: 44%;
+}
+
+.countAfterSearch {
+  background-color: #242f3d;
+  color: #636f7a;
+  display: inline-block;
+  width: 100%;
+  padding: 2% 0 2% 5%;
+  font-size: 1.1em;
+  box-sizing: border-box;
+}

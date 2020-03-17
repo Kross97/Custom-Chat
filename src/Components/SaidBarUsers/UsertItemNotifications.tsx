@@ -12,7 +12,7 @@ const actionCreators = {
 };
 
 const randomTimeForCreateMessage = [
-  500, 1000, 2500, 5000, 10000, 30000, 60000, 120000, 150000, 240000, 350000,
+  500, 1000, 2500, 5000, 10000, 30000, 60000, 120000, 150000, 240000, 350000, 700000,
 ];
 
 export const UsertItemNotifications = (props: IUserNotificationsProps) => {
@@ -30,12 +30,12 @@ export const UsertItemNotifications = (props: IUserNotificationsProps) => {
       date: Date.parse(`${new Date()}`),
       value: faker.lorem.lines(),
     };
-    addNewMessage(message, userId);
+    addNewMessage(message);
   };
 
-  const indexRandomTime = Math.floor(Math.random() * (10 - 0 + 1)) + 0;
+  const indexRandomTime = Math.floor(Math.random() * (11 - 0 + 1)) + 0;
   const randomTime = randomTimeForCreateMessage[indexRandomTime];
-  console.log('Для:', userId, 'Сообщение будет через: ', randomTime);
+  // console.log('Для:', userId, 'Сообщение будет через: ', randomTime);
   useEffect(() => {
     const idInterval = setInterval(createNewMessage, randomTime);
     return () => {
@@ -74,7 +74,10 @@ export const UsertItemNotifications = (props: IUserNotificationsProps) => {
 
   return (
     <>
-      {countNotReadMessages !== 0 && notifications && <span>{countNotReadMessages}</span>}
+      {countNotReadMessages !== 0
+        && allUserMesagesLength !== 0
+        && notifications
+        && <span>{countNotReadMessages}</span>}
     </>
   );
 };

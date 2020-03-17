@@ -37,7 +37,7 @@ export const MenuLoadFiles = (props: IMenuLoadFilesProps) => {
           date: Date.parse(`${new Date()}`),
           value: String(reader.result),
         };
-        addNewMessage(message, idCurrentUser);
+        addNewMessage(message);
       };
     });
   };

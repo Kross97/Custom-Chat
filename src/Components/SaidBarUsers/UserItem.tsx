@@ -3,28 +3,30 @@ import { bindActionCreators } from 'redux';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import cn from 'classnames';
-// import { allUsers } from '../../reducers';
+import { allUsers } from '../../reducers';
 import { UsertItemNotifications } from './UsertItemNotifications';
 import { IUserItemProps } from './Interface_Saidbar';
-import { IApplicationState } from '../../Global_Interface';
 import userStyle from '../../styles/SaidBarUsers/UserItem.css';
-import * as actions from '../../actions';
+import { IApplicationState } from '../../Global_Interface';
 
 const actionCreators = {
-  setNewCurrentUser: actions.setNewCurrentUser,
+  setNewCurrentUser: allUsers.actions.setNewCurrentUser,
 };
 
 export const UserItem = React.memo((props: IUserItemProps) => {
   const { user, message, option } = props;
 
-  const idCurrentUser = useSelector((state: IApplicationState) => state.allUsers.currentUserId);
+  const idCurrentUser = useSelector(
+    ({ allUsers: { currentUserId } }: IApplicationState) => currentUserId,
+  );
 
   const dispatch = useDispatch();
   const { setNewCurrentUser } = bindActionCreators(actionCreators, dispatch);
 
   const setCurrentUser = () => {
-    setNewCurrentUser(user.id);
+    setNewCurrentUser({ id: user.id });
   };
+
 
   let valueMessage: JSX.Element = <></>;
   let dateLastMessage = '';
@@ -34,14 +36,14 @@ export const UserItem = React.memo((props: IUserItemProps) => {
     const hourLastMessage = dateMessage.getHours() <= 9 ? `0${dateMessage.getHours()}` : `${dateMessage.getHours()}`;
     const minuteLastMessage = dateMessage.getMinutes() <= 9 ? `0${dateMessage.getMinutes()}` : `${dateMessage.getMinutes()}`;
     if (message.value.length < 25) {
-      buidValueMessage = <>lastMessageUser.value</>;
+      buidValueMessage = <>{message.value}</>;
     } else {
       buidValueMessage = <>{`${message.value.substring(0, 24)}...`}</>;
     }
     valueMessage = message.idMainUser == 'Master' ? (
       <>
         <span>You: </span>
-        buidValueMessage
+        {buidValueMessage}
       </>
     ) : buidValueMessage;
 

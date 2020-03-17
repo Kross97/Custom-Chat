@@ -86,21 +86,28 @@ cursor: url('../../img/icon-clicker.png') , pointer;
 /* SHOW IMAGE */
 
 .backgroundImg {
-  width: 100%;
+  width: 133.7%;
   position: absolute;
   z-index: 1;
-  left: 0;
-  height: 100%;
+  left: -420px;
+  height: 114.3%;
   background-color: #242424;
   opacity: 0.7;
-  top: 0;
+  top: -60px;
+}
+
+.imageContainer {
+  width: 55%;
+  height: 45%;
+  position: absolute;
+  top: 18%;
+  left: 10%;
+  z-index: 3;
+  text-align: center;
+  vertical-align: middle;
+  box-sizing: border-box;
 }
 
 .imgView {
-  position: absolute;
-  z-index: 3;
-  top: 10%;
-  left: 22%;
-  max-width: 60%;
-  max-height: 60%;
+max-width: 100%;
 }

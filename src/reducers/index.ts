@@ -38,9 +38,6 @@ export const allUsers = createSlice({
       const usersId = users.map((user) => user.id);
       state.allUsersId = usersId;
       users.forEach((user) => {
-        if (state.currentUserId === user.id) {
-          user.notReadMessages = 0;
-        }
         state.allDataUsers[user.id] = user;
       });
       state.loadingState = 'loading users Succes';
@@ -59,12 +56,8 @@ export const allUsers = createSlice({
     addNewMessageSucces: (state, action: PayloadAction<Users.IAddMessage>) => {
       const { message } = action.payload;
       state.allDataUsers[message.idUser].allMessages.push(message);
-      if (message.idUser !== state.currentUserId) {
-        const { notReadMessages } = state.allDataUsers[message.idUser];
-        state.allDataUsers[message.idUser].notReadMessages = notReadMessages + 1;
-      } else {
-        state.allDataUsers[message.idUser].notReadMessages = 0;
-      }
+      const { notReadMessages } = state.allDataUsers[message.idUser];
+      state.allDataUsers[message.idUser].notReadMessages = message.idMainUser === 'Master' ? notReadMessages : notReadMessages + 1;
       state.loadingState = 'add message Succes';
     },
     addNewMessageFailed: (state) => {
@@ -99,10 +92,13 @@ export const allUsers = createSlice({
       );
       state.allMessageForDelete = [];
     },
+    zeroingNewMessagesUser: (state, action) => {
+      const { id } = action.payload;
+      state.allDataUsers[id].notReadMessages = 0;
+    },
     setNewCurrentUser: (state, action) => {
       const { id } = action.payload;
       state.currentUserId = state.currentUserId === id ? -1 : id;
-      state.allDataUsers[id].notReadMessages = 0;
       state.allMessageForDelete = [];
     },
     deleteCurrentUser: (state) => {
@@ -118,6 +114,7 @@ export const allUsers = createSlice({
       const { currentUserId } = state;
       if (currentUserId !== -1) {
         state.allDataUsers[currentUserId].allMessages = [];
+        state.allDataUsers[currentUserId].notReadMessages = 0;
       }
     },
   },
