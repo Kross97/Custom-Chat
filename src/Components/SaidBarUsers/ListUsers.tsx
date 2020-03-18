@@ -18,6 +18,20 @@ export const ListUsers = () => {
     ({ actualUiApplication }: IApplicationState) => actualUiApplication.searchValue,
   );
 
+  const isSorting = useSelector(
+    ({ actualUiApplication: { isSotringUsers } }: IApplicationState) => isSotringUsers,
+  );
+
+  const allUsersAfterSorting = allUsers;
+  if (isSorting && allUsersAfterSorting.length > 1) {
+    allUsersAfterSorting.sort((user1, user2) => {
+      const lastMessageUser1 = user1.allMessages[user1.allMessages.length - 1];
+      const lastMessageUser2 = user2.allMessages[user2.allMessages.length - 1];
+      const sortPosition1 = lastMessageUser1 != undefined ? lastMessageUser1.date : NaN;
+      const sortPosition2 = lastMessageUser2 != undefined ? lastMessageUser2.date : NaN;
+      return sortPosition2 - sortPosition1;
+    });
+  }
   const dispatch = useDispatch();
   const { loadingAllUsers } = bindActionCreators(actionCreators, dispatch);
 
@@ -59,7 +73,7 @@ export const ListUsers = () => {
 
   const listNotSearch = (
     <ul className={listStyle.listUsers}>
-      {allUsers.length !== 0 && allUsers.map((user) => (
+      {allUsersAfterSorting.length !== 0 && allUsersAfterSorting.map((user) => (
         <UserItem
           key={user.id}
           user={user}

@@ -49,13 +49,32 @@ export const MenuLoadFiles = (props: IMenuLoadFilesProps) => {
   return (
     <div className={styleMenuLoadFile}>
       <label>
+        <div className={menuStyle.customInput}>
+          <div className={menuStyle.icon} />
+          <span>load image</span>
+        </div>
         <input onChange={addFileToMessage('image')} multiple type="file" accept="image/*" />
       </label>
       <label>
+        <div className={menuStyle.customInput}>
+          <div className={menuStyle.icon} />
+          <span>load audio</span>
+        </div>
         <input onChange={addFileToMessage('audio')} type="file" accept="audio/*" />
       </label>
       <label>
+        <div className={menuStyle.customInput}>
+          <div className={menuStyle.icon} />
+          <span>load video</span>
+        </div>
         <input onChange={addFileToMessage('video')} type="file" accept="video/*" />
+      </label>
+      <label>
+        <div className={menuStyle.customInput}>
+          <div className={menuStyle.icon} />
+          <span>load file link</span>
+        </div>
+        <input onChange={addFileToMessage('doc')} type="file" accept="file_extension" />
       </label>
     </div>
   );

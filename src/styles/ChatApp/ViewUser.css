@@ -1,0 +1,37 @@
+.blockBackground {
+  width: 100%;
+  height: 1000px;
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: black;
+  opacity: 0.7;
+}
+
+.container {
+  position: absolute;
+  z-index: 2;
+  width: 17%;
+  height: 40%;
+  top: 19%;
+  left: 43%;
+  background-color: #17212b;
+  border-radius: 15%;
+  text-align: center;
+}
+
+.container > img {
+  display: block;
+  width: 61%;
+  height: 45%;
+  margin: 5% auto;
+}
+
+.container span {
+  display: block;
+  color: #67737e;
+  font-size: 2.5em;
+  margin-top: 12%;
+  margin-bottom: 16%;
+}

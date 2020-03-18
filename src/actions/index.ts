@@ -16,6 +16,16 @@ export const addNewUser = (user: IUser): AppThunk => async (dispatch: StoreDispa
   }
 };
 
+export const editCurrentUser = (user: IUser): AppThunk => async (dispatch: StoreDispatch) => {
+  try {
+    dispatch(allUsers.actions.editUserSucces({ user }));
+    await axios.delete(`http://localhost:3000/users/${user.id}`);
+    await axios.post('http://localhost:3000/users', user);
+  } catch (e) {
+    //  console.log(e);
+  }
+};
+
 export const zeroingNewMessagesUser = (id: number): AppThunk => async (dispatch: StoreDispatch) => {
   try {
     dispatch(allUsers.actions.zeroingNewMessagesUser({ id }));
@@ -92,7 +102,8 @@ export const increaseCountMessagesUser = (
     const responceUser = await axios.get(`http://localhost:3000/users/?id=${id}`);
     const user: IUser = { ...responceUser.data[0] };
     const allUserMessages = user.allMessages.length;
-    const newRangeMessages = allUserMessages - 1 - (factor * countLoadingMessages);
+    const newRangeMessages = allUserMessages - (factor * countLoadingMessages)
+     - user.notReadMessages;
     const startIndexMessages = newRangeMessages < 0 ? 0 : newRangeMessages;
 
     const newFlowMessages = user.allMessages.slice(startIndexMessages);
@@ -113,7 +124,9 @@ export const loadingAllUsers = (): AppThunk => async (dispatch: StoreDispatch) =
     responceUsers.data.forEach((user: IUser) => {
       const { allMessages } = user;
       const countMessageForChat = 10;
-      user.allMessages = allMessages.slice(allMessages.length - 1 - countMessageForChat);
+      const newRangeMessages = allMessages.length - countMessageForChat - user.notReadMessages;
+      const startIndexMessages = newRangeMessages < 0 ? 0 : newRangeMessages;
+      user.allMessages = allMessages.slice(startIndexMessages);
       return user;
     });
     dispatch(allUsers.actions.loadingUsersFromServerSucces({ users: responceUsers.data }));
@@ -140,7 +153,7 @@ export const addNewMessage = (message: IMessage): AppThunk => async (dispatch: S
     const userUpdated = { ...responceUser.data[0] };
     userUpdated.allMessages.push(message);
     const { notReadMessages } = userUpdated;
-    userUpdated.notReadMessages = message.idMainUser === 'Master' ? notReadMessages : notReadMessages + 1;
+    userUpdated.notReadMessages = message.idMainUser === 'Master' ? 0 : notReadMessages + 1;
     await axios.patch(`http://localhost:3000/users/${message.idUser}`, userUpdated);
   } catch (e) {
     dispatch(allUsers.actions.addNewMessageFailed());

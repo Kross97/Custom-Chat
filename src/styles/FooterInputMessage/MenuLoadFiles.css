@@ -9,18 +9,6 @@
   z-index: -1;
 }
 
-
-/*.menuLoadFilesHide input {
-  width: 100%;
-  height: 40px;
-  position: relative;
-  background-color: inherit;
-  border: none;
-  color: #6C7883;
-  font-size: 1.2em;
-}
-*/
-
 .menuLoadFilesShow {
     height: 225px;
     z-index: 1;
@@ -28,4 +16,78 @@
 
 .menuLoadFilesShow button {
   display: block;
+}
+
+.menuLoadFilesHide input {
+  width: 100%;
+  height: 20%;
+}
+
+.menuLoadFilesHide label{
+  height: 20%;
+  display: block;
+  cursor: url('../../img/icon-clicker.png') , pointer;
+}
+
+
+.customInput {
+  display: block;
+  width: 100%;
+  height: 20%;
+  position: absolute;
+  z-index: 1;
+  background-color: #17212b;
+  color: #fff;
+  font-size: 0.9em;
+}
+
+.customInput:hover {
+  background-color: #21303e;
+}
+
+.customInput > span {
+  position: absolute;
+  left: 50%;
+  top: 22%;
+}
+
+
+.menuLoadFilesHide label:nth-child(1) .icon {
+  background-image: url('../../img/camera.png');
+  background-repeat: no-repeat;
+  width: 11%;
+  height: 51%;
+  position: absolute;
+  top: 15%;
+  left: 7%;
+}
+
+.menuLoadFilesHide label:nth-child(2) .icon {
+  background-image: url('../../img/music.png');
+  background-repeat: no-repeat;
+  width: 11%;
+  height: 51%;
+  position: absolute;
+  top: 15%;
+  left: 7%;
+}
+
+.menuLoadFilesHide label:nth-child(3) .icon {
+  background-image: url('../../img/video.png');
+  background-repeat: no-repeat;
+  width: 11%;
+  height: 51%;
+  position: absolute;
+  top: 15%;
+  left: 7%;
+}
+
+.menuLoadFilesHide label:nth-child(4) .icon {
+  background-image: url('../../img/document.png');
+  background-repeat: no-repeat;
+  width: 11%;
+  height: 51%;
+  position: absolute;
+  top: 15%;
+  left: 7%;
 }

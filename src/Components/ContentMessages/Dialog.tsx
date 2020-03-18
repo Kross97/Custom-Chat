@@ -2,11 +2,11 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { useParams } from 'react-router-dom';
 import dialog from '../../styles/ContentMessages/Dialog.css';
 import { IApplicationState } from '../../Global_Interface';
 import { IdentifierLoading } from './IdentifierLoading';
 import { ItemMessage } from './ItemMessage';
-import { IDialog } from './ContentMessage_Interface';
 import * as actions from '../../actions';
 
 const actionCreators = {
@@ -14,6 +14,8 @@ const actionCreators = {
   increaseCountMessagesUser: actions.increaseCountMessagesUser,
   zeroingNewMessagesUser: actions.zeroingNewMessagesUser,
 };
+
+const allMonths = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 const discoverHeightMessageContainer = (count: number) => {
   let heightFooter = '';
@@ -39,11 +41,11 @@ const discoverHeightMessageContainer = (count: number) => {
   return heightFooter;
 };
 
-export default React.memo((props: IDialog) => {
+export default () => {
   const [factorIncreaseMessages, setFactorIncreaseMessages] = useState<number>(1);
   const [controlScroll, setControlScroll] = useState<string>('none');
 
-  const { match: { params: { id } } } = props;
+  const { id } = useParams();
 
   const dispatch = useDispatch();
   const {
@@ -79,6 +81,10 @@ export default React.memo((props: IDialog) => {
     setControlScroll('none');
   }, [notReadMessages]);
 
+  const removeNewMessage = () => {
+    zeroingNewMessagesUser(currentIdUser);
+  };
+
   const scrollDialog = ({ currentTarget }: React.UIEvent<HTMLUListElement>) => {
     if (currentTarget.scrollTop == 0 && stateLoadingFlowMessages !== 'all flow loaded') {
       currentTarget.scrollTop = 50;
@@ -92,7 +98,7 @@ export default React.memo((props: IDialog) => {
     if (controlScroll === 'none') {
       const newScrollPosition = (
         currentTarget.scrollHeight / messagesUser.length) * notReadMessages;
-      currentTarget.scrollTop = (currentTarget.scrollTop - newScrollPosition) < 0 ? 3 : currentTarget.scrollTop - newScrollPosition;
+      currentTarget.scrollTop = currentTarget.scrollHeight - newScrollPosition;
       setControlScroll('control');
     }
   };
@@ -101,18 +107,45 @@ export default React.memo((props: IDialog) => {
     ({ actualUiApplication }: IApplicationState) => actualUiApplication.countRow,
   );
   const heightMessageContainer = discoverHeightMessageContainer(countRow);
-
+  let dateControler = '';
+  let newMessageControler = -1;
   return (
     <main className={dialog.containerMessages} style={{ height: heightMessageContainer }}>
       <ul onScroll={scrollDialog}>
         { (stateLoadingFlowMessages === 'loading messages' || stateLoadingFlowMessages === 'loading error') && <IdentifierLoading stateLoading={stateLoadingFlowMessages} />}
-        {messagesUser.length !== 0 && messagesUser.map((message) => (
-          <ItemMessage
-            key={message.id}
-            message={message}
-          />
-        ))}
+        {messagesUser.length !== 0 && messagesUser.map((message, i) => {
+          const indexStartNewMessages = messagesUser.length - notReadMessages;
+          const messageDate = new Date(message.date);
+          const messGrouptDate = `${allMonths[messageDate.getMonth()]} ${messageDate.getDate()}`;
+          let checkMessagesGroup: JSX.Element = <></>;
+          if (i === indexStartNewMessages && i !== newMessageControler) {
+            newMessageControler = 1;
+            checkMessagesGroup = (
+              <span
+                onMouseEnter={removeNewMessage}
+                className={dialog.checkMessages}
+              >
+                New messages
+              </span>
+            );
+          } else if (messGrouptDate !== dateControler && newMessageControler === -1) {
+            dateControler = messGrouptDate;
+            checkMessagesGroup = (
+              <span className={dialog.checkMessages}>
+                {messGrouptDate}
+              </span>
+            );
+          }
+          return (
+            <React.Fragment key={message.id}>
+              {checkMessagesGroup}
+              <ItemMessage
+                message={message}
+              />
+            </React.Fragment>
+          );
+        })}
       </ul>
     </main>
   );
-});
+};

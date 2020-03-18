@@ -17,6 +17,8 @@ const createValueMessage = (type: string, value: string, viewImage: viewImage) =
       return <img className={itemMessage.imgValue} onClick={viewImage} src={value} alt="фото" aria-hidden />;
     case 'audio':
       return <audio controls src={value} muted />;
+    case 'doc':
+      return <a download href={value}>upload file</a>;
     default:
       return <video className={itemMessage.videoValue} controls src={value} muted />;
   }

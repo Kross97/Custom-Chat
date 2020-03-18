@@ -4,11 +4,13 @@ import _ from 'lodash';
 import { IMessage } from '../Global_Interface';
 import * as Users from './AllUsers__Inteface';
 import * as Audio from './CurrentAudio_interface';
+import * as UiApp from './ActualUiApplication_Interface';
 
 const allUsersState: Users.IStateAllUsers = {
   allDataUsers: {},
   allUsersId: [],
   allMessageForDelete: [],
+  isEditUser: false,
   currentUserId: -1,
   loadingState: '',
   loadingFlowMessageState: '',
@@ -50,6 +52,14 @@ export const allUsers = createSlice({
       const { notifications } = state.allDataUsers[currentUserId];
       state.allDataUsers[currentUserId].notifications = !notifications;
     },
+    editCurrentUser: (state) => {
+      state.isEditUser = true;
+    },
+    editUserSucces: (state, action) => {
+      const { user } = action.payload;
+      state.isEditUser = false;
+      state.allDataUsers[user.id] = user;
+    },
     addNewMessageRequest: (state) => {
       state.loadingState = 'add message Request';
     },
@@ -57,7 +67,7 @@ export const allUsers = createSlice({
       const { message } = action.payload;
       state.allDataUsers[message.idUser].allMessages.push(message);
       const { notReadMessages } = state.allDataUsers[message.idUser];
-      state.allDataUsers[message.idUser].notReadMessages = message.idMainUser === 'Master' ? notReadMessages : notReadMessages + 1;
+      state.allDataUsers[message.idUser].notReadMessages = message.idMainUser === 'Master' ? 0 : notReadMessages + 1;
       state.loadingState = 'add message Succes';
     },
     addNewMessageFailed: (state) => {
@@ -153,8 +163,10 @@ export const currentAudio = createSlice({
   },
 });
 
-const actualUiApplicationState = {
+const actualUiApplicationState: UiApp.IUiApplicationState = {
   countRow: 0,
+  dateLastMessageUsers: {},
+  isSotringUsers: false,
   searchValue: '',
 };
 
@@ -171,6 +183,14 @@ export const actualUiApplication = createSlice({
     setSearchValue: (state, action) => {
       const { search } = action.payload;
       state.searchValue = search;
+    },
+    addNewDataLastMessage: (state, action: PayloadAction<UiApp.IaddLastDateMessage>) => {
+      const { id, date } = action.payload;
+      state.dateLastMessageUsers[id] = date;
+    },
+    sotringUsersByMessages: (state) => {
+      const { isSotringUsers } = state;
+      state.isSotringUsers = !isSotringUsers;
     },
   },
 });

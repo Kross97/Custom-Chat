@@ -1,21 +1,20 @@
 /* eslint-disable */
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import _ from 'lodash';
 import audioStyle from '../../styles/ChatApp/FormAddNewAudio.css';
-import { IFormAddNewAudio } from './Interface_Chat';
 import * as actions from '../../actions';
-
+import { ContextFormAddUser } from './ChatApplication';
 
 const actionCreators = {
   addNewAudio : actions.addNewAudio,
 }
 
-export default (props: IFormAddNewAudio) => {
+export default () => {
   const [audioSrc, setAudioSrc] = useState<string>('');
-
-  const { showFormAddAudio } = props;
+  const [audioName, setAudioName] = useState<string>('');
+  const { showFormAddAudio } = useContext(ContextFormAddUser);
 
   const dispatch = useDispatch();
   const { addNewAudio } = bindActionCreators(actionCreators, dispatch);
@@ -29,6 +28,7 @@ export default (props: IFormAddNewAudio) => {
     reader.readAsDataURL(file);
     reader.onload = () => {
       setAudioSrc(String(reader.result));
+      setAudioName(file.name);
     }
   }
 
@@ -47,14 +47,14 @@ export default (props: IFormAddNewAudio) => {
          <label>
           <div className={audioStyle.imgAudio}/>
               <div className={audioStyle.customInput}>
-              Загрузите аудио
+              {audioName === '' ? 'Loading sound ' : audioName}
               <div className={audioStyle.customInputPlus} />
               </div>
               <input onChange={getAudioSrc} type="file" accept="audio/*" />
             </label>
             <div className={audioStyle.btnGroup}>
-          <button type="submit">Сохранить</button>
-          <button onClick={showFormAddAudio} type="button">Отменить</button>
+          <button type="submit">Save</button>
+          <button onClick={showFormAddAudio} type="button">Cancel</button>
           </div>
         </form>
  </>
