@@ -20,22 +20,22 @@ const discoverHeightMessageContainer = (count: number) => {
   let heightFooter = '';
   switch (count) {
     case 2:
-      heightFooter = '91.5%';
-      break;
-    case 3:
       heightFooter = '90.5%';
       break;
+    case 3:
+      heightFooter = '89.5%';
+      break;
     case 4:
-      heightFooter = '88.5%';
+      heightFooter = '87.5%';
       break;
     case 5:
-      heightFooter = '85.5%';
+      heightFooter = '84.5%';
       break;
     case 6:
-      heightFooter = '82.5%';
+      heightFooter = '81.5%';
       break;
     default:
-      heightFooter = '92.5%';
+      heightFooter = '91.5%';
   }
   return heightFooter;
 };

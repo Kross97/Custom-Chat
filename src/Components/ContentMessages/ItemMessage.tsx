@@ -47,10 +47,6 @@ export const ItemMessage = (props: IItemMessageProps) => {
     ({ allUsers: { allMessageForDelete } }: IApplicationState) => allMessageForDelete,
   );
 
-  const loadingMessageState = useSelector(
-    (state: IApplicationState) => state.allUsers.loadingMessageState,
-  );
-
   const listSetMessagesDelete = new Set(listMessageForDelete);
 
   const deleteItemMessage = (id: number) => () => {
@@ -81,7 +77,6 @@ export const ItemMessage = (props: IItemMessageProps) => {
 
   const valueMessage = createValueMessage(message.type, message.value, viewImage);
 
-  const imgNotificationsPath = loadingMessageState === 'add message requset ' ? './src/img/icon-sended.png' : './src/img/icon-readen.png';
   return (
     <>
       {isShowImage === 'show' && (<div onClick={viewImage} className={itemMessage.backgroundImg} aria-hidden />)}
@@ -96,9 +91,9 @@ export const ItemMessage = (props: IItemMessageProps) => {
         aria-hidden
       >
         {valueMessage}
-        {message.idMainUser === 'Master' && <img className={itemMessage.imgResponce} src={imgNotificationsPath} alt="resp" />}
         <span className={itemMessage.dateMessage}>{`${hourWriting}:${minuteWriting}`}</span>
         <span />
+        {message.idMainUser === 'Master' && <img className={itemMessage.imgResponce} src="./src/img/icon-readen.png" alt="resp" />}
       </article>
     </>
   );

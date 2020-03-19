@@ -13,22 +13,22 @@ const discoverHeightFooter = (count: number) => {
   let heightFooter = '';
   switch (count) {
     case 1:
-      heightFooter = '5%';
-      break;
-    case 2:
-      heightFooter = '7%';
-      break;
-    case 3:
       heightFooter = '9%';
       break;
-    case 4:
+    case 2:
       heightFooter = '11%';
       break;
+    case 3:
+      heightFooter = '13%';
+      break;
+    case 4:
+      heightFooter = '15%';
+      break;
     case 5:
-      heightFooter = '14%';
+      heightFooter = '17%';
       break;
     default:
-      heightFooter = '4%';
+      heightFooter = '7%';
   }
   return heightFooter;
 };

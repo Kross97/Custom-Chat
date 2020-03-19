@@ -145,7 +145,7 @@ export const loadingAudioSingl = (): AppThunk => async (dispatch: StoreDispatch)
 };
 
 export const addNewMessage = (message: IMessage): AppThunk => async (dispatch: StoreDispatch) => {
-  dispatch(allUsers.actions.addNewMessageRequest({ addLoad: 'add message requset ' }));
+  dispatch(allUsers.actions.addNewMessageRequest());
   try {
     dispatch(allUsers.actions.addNewMessageSucces({ message }));
     const responceUser = await axios.get(`http://localhost:3000/users/?id=${message.idUser}`);

@@ -1,6 +1,8 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 const autoprefixer = require('autoprefixer');
+const cssnano = require('cssnano');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   mode: process.env.NODE_ENV || 'development',
@@ -22,6 +24,9 @@ module.exports = {
             loader: 'style-loader',
           },
           {
+            loader: MiniCssExtractPlugin.loader,
+          },
+          {
             loader: 'css-loader',
             options: {
               modules: true,
@@ -34,6 +39,7 @@ module.exports = {
                 autoprefixer({
                   overrideBrowserslist: ['ie >= 8', 'last 4 version'],
                 }),
+                cssnano,
               ],
               sourceMap: true,
             },
@@ -87,6 +93,9 @@ module.exports = {
     stats: 'errors-only',
   },
   plugins: [
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+    }),
     new HtmlWebpackPlugin({
       template: './src/index.html',
     }),

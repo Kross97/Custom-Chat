@@ -39,34 +39,38 @@ export const ListUsers = () => {
     loadingAllUsers();
   }, [allUsers.length]);
 
-  const allUsersAfterSearch = allUsers.length !== 0 && allUsers.map((user) => (
-    (user.name.includes(searchValue) || user.surName.includes(searchValue)) && (
-    <UserItem
-      key={user.id}
-      user={user}
-      message={user.allMessages[user.allMessages.length - 1]}
-      option="type user not create message"
-    />
-    )
-  ));
+  const allUsersAfterSearch = allUsersAfterSorting.length !== 0 && allUsersAfterSorting.map(
+    (user) => (
+      (user.name.includes(searchValue) || user.surName.includes(searchValue)) && (
+      <UserItem
+        key={user.id}
+        user={user}
+        message={user.allMessages[user.allMessages.length - 1]}
+        option="type user not create message"
+      />
+      )
+    ),
+  );
 
   const countUsersAfterSearch = allUsersAfterSearch != false
     ? allUsersAfterSearch.filter((user) => user).length : 0;
 
-  const allMessagesAfterSearch = allUsers.length !== 0 && allUsers.map((user) => {
-    const isHaveMessageValue = user.allMessages.find((mes) => mes.value.includes(searchValue));
-    if (isHaveMessageValue != undefined) {
-      return (
-        <UserItem
-          key={user.id}
-          user={user}
-          message={isHaveMessageValue}
-          option="type message not create message"
-        />
-      );
-    }
-    return false;
-  });
+  const allMessagesAfterSearch = allUsersAfterSorting.length !== 0 && allUsersAfterSorting.map(
+    (user) => {
+      const isHaveMessageValue = user.allMessages.find((mes) => mes.value.includes(searchValue));
+      if (isHaveMessageValue != undefined) {
+        return (
+          <UserItem
+            key={user.id}
+            user={user}
+            message={isHaveMessageValue}
+            option="type message not create message"
+          />
+        );
+      }
+      return false;
+    },
+  );
 
   const countMesAfterSearch = allMessagesAfterSearch != false
     ? allMessagesAfterSearch.filter((mes) => mes).length : 0;
@@ -86,11 +90,11 @@ export const ListUsers = () => {
 
   const listAfterSearch = (
     <>
-      <span className={listStyle.countAfterSearch}>{`Found :${countUsersAfterSearch} users`}</span>
+      <span className={listStyle.countAfterSearch}>{`Found : ${countUsersAfterSearch} users`}</span>
       <ul className={`${listStyle.listUsers} ${listStyle.afterSearch}`}>
         {allUsersAfterSearch}
       </ul>
-      <span className={listStyle.countAfterSearch}>{`Found :${countMesAfterSearch} messages`}</span>
+      <span className={listStyle.countAfterSearch}>{`Found : ${countMesAfterSearch} messages`}</span>
       <ul className={`${listStyle.listUsers} ${listStyle.afterSearch}`}>
         {allMessagesAfterSearch}
       </ul>

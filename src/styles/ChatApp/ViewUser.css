@@ -1,7 +1,7 @@
 .blockBackground {
   width: 100%;
   height: 1000px;
-  z-index: 1;
+  z-index: 3;
   position: absolute;
   top: 0;
   left: 0;
@@ -11,7 +11,7 @@
 
 .container {
   position: absolute;
-  z-index: 2;
+  z-index: 3;
   width: 17%;
   height: 40%;
   top: 19%;
@@ -34,4 +34,17 @@
   font-size: 2.5em;
   margin-top: 12%;
   margin-bottom: 16%;
+}
+
+@media (max-width: 375px) {
+  .container {
+    width: 62%;
+    height: 49%;
+    top: 21%;
+    left: 19%;
+  }
+
+  .blockBackground {
+    height: 670px;
+  }
 }

@@ -27,7 +27,7 @@ margin-top: 5px;
 }
 
 /* MENU NAVIGATION */
-.containerNav a {
+.containerNav .linkBack {
   display: none;
 }
 
@@ -117,7 +117,7 @@ margin-top: 5px;
     background-position: 10px 11px;
   }
 
-  .containerNav a {
+  .containerNav .linkBack {
     display: inline;
   }
 

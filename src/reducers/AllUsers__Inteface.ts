@@ -9,13 +9,7 @@ export interface IStateAllUsers {
   allMessageForDelete: number[],
   isEditUser: boolean,
   loadingState: string,
-  loadingMessageState: string,
   loadingFlowMessageState: string,
-}
-
-
-export interface IAddMessageLoad {
-  addLoad: string,
 }
 
 export interface ILoadingUsers {

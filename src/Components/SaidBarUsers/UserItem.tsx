@@ -52,10 +52,10 @@ export const UserItem = React.memo((props: IUserItemProps) => {
     const minuteLastMessage = dateMessage.getMinutes() <= 9 ? `0${dateMessage.getMinutes()}` : `${dateMessage.getMinutes()}`;
     if (message.type !== 'text') {
       buidValueMessage = <>{message.type}</>;
-    } else if (message.value.length < 25) {
+    } else if (message.value.length < 22) {
       buidValueMessage = <>{message.value}</>;
     } else {
-      buidValueMessage = <>{`${message.value.substring(0, 24)}...`}</>;
+      buidValueMessage = <>{`${message.value.substring(0, 21)}...`}</>;
     }
     valueMessage = message.idMainUser == 'Master' ? (
       <>

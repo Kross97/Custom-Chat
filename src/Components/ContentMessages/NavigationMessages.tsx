@@ -24,7 +24,7 @@ export const NavigationMessages = () => {
 
   return (
     <nav className={navStyle.containerNav}>
-      <Link to="/"><button className={navStyle.btnBack} aria-label="return" type="button" /></Link>
+      <Link to="/" className={navStyle.linkBack}><button className={navStyle.btnBack} aria-label="return" type="button" /></Link>
       <CheckUser currentIdUser={currentIdUser} user={user} />
       <MenuAdditional isShowMenu={isShowMenu} currentIdUser={currentIdUser} user={user} />
       <button onClick={showMenu} type="button" aria-label="menu" className={navStyle.btnMenu} />

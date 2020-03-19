@@ -13,7 +13,6 @@ const allUsersState: Users.IStateAllUsers = {
   isEditUser: false,
   currentUserId: -1,
   loadingState: '',
-  loadingMessageState: '',
   loadingFlowMessageState: '',
 };
 
@@ -61,19 +60,18 @@ export const allUsers = createSlice({
       state.isEditUser = false;
       state.allDataUsers[user.id] = user;
     },
-    addNewMessageRequest: (state, action: PayloadAction<Users.IAddMessageLoad>) => {
-      const { addLoad } = action.payload;
-      state.loadingMessageState = addLoad;
+    addNewMessageRequest: (state) => {
+      state.loadingState = 'add message Request';
     },
     addNewMessageSucces: (state, action: PayloadAction<Users.IAddMessage>) => {
       const { message } = action.payload;
       state.allDataUsers[message.idUser].allMessages.push(message);
       const { notReadMessages } = state.allDataUsers[message.idUser];
       state.allDataUsers[message.idUser].notReadMessages = message.idMainUser === 'Master' ? 0 : notReadMessages + 1;
-      state.loadingMessageState = 'add message Succes';
+      state.loadingState = 'add message Succes';
     },
     addNewMessageFailed: (state) => {
-      state.loadingMessageState = 'add message Failed';
+      state.loadingState = 'add message Failed';
     },
     addNewFlowMessagesUserRequest: (state) => {
       state.loadingFlowMessageState = 'loading messages';
