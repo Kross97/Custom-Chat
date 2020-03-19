@@ -68,7 +68,7 @@ export default () => {
  const { showFormAddUser } = useContext(ContextFormAddUser);
 
   const addUser = (event: React.FormEvent<HTMLFormElement>) => {
-    if (name === '' || surName === '' || imgSrc === '#') {
+    if ((name === '' && surName === '') || imgSrc === '#') {
       setErrorForm('error');
       return;
     }
