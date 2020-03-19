@@ -24,6 +24,20 @@ scrollbar-color: #4082bc #242f3d;
   box-sizing: border-box;
 }
 
+@media (max-width: 1152px) {
+  .listUsers {
+    height: 86%;
+    max-height: 86%;
+    margin-bottom: 0px;
+    scrollbar-width: none;
+  }
+
+  .afterSearch {
+    height: auto;
+    max-height: 37%;
+  }
+}
+
 @media (max-width: 375px) {
   .listUsers {
     height: 83%;

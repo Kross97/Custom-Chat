@@ -22,7 +22,7 @@ export const ContentMessages = () => {
     <div className={styleContainer}>
       <NavigationMessages />
       <Switch>
-        <React.Suspense fallback={<div className={messagesStyle.containerMessages} />}>
+        <React.Suspense fallback={<div>Загрузка...</div>}>
           <Route exact path="/" component={DefaultWindowDialog} />
           <Route path="/dialog/:id" component={Dialog} />
         </React.Suspense>

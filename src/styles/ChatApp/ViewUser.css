@@ -7,6 +7,7 @@
   left: 0;
   background-color: black;
   opacity: 0.7;
+  cursor: url('../../img/icon-clicker.png') , pointer;
 }
 
 .container {
@@ -19,6 +20,7 @@
   background-color: #17212b;
   border-radius: 15%;
   text-align: center;
+  cursor: url('../../img/icon-clicker.png') , pointer;
 }
 
 .container > img {
@@ -26,6 +28,7 @@
   width: 61%;
   height: 45%;
   margin: 5% auto;
+  border-radius: 90px;
 }
 
 .container span {
@@ -34,6 +37,18 @@
   font-size: 2.5em;
   margin-top: 12%;
   margin-bottom: 16%;
+}
+
+@media (max-width: 1152px) {
+  .blockBackground {
+    height: 700px;
+  }
+
+  .container {
+    width: 22%;
+    height: 46%;
+    left: 40%;
+  }
 }
 
 @media (max-width: 375px) {

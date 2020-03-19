@@ -34,10 +34,17 @@
   text-align: center;
 }
 
+@media (max-width: 1152px) {
+  .checkMessages {
+    height: 3.8%;
+    width: 24%;
+    margin-left: 34%;
+  }
+}
+
 @media (max-width: 375px) {
   .checkMessages {
     width: 55%;
-    height: 3.8%;
     margin-left: 15%;
   }
 

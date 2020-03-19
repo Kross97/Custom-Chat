@@ -5,6 +5,13 @@
   display: inline-block;
 }
 
+@media (max-width: 1152px) {
+  .container {
+    height: 700px;
+    width: 35.5%;
+  }
+}
+
 @media (max-width:375px) {
 .container {
   position: absolute;

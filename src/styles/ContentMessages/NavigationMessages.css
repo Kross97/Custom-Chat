@@ -98,6 +98,7 @@ margin-top: 5px;
   height: auto;
   margin-left: 20px;
   text-align: left;
+  margin-top: 8px;
 }
 
 .userContainer span:nth-child(2) {
@@ -107,6 +108,18 @@ margin-top: 5px;
 
 .userContainer span:nth-child(3) {
   color: #6c7883;
+}
+
+@media (max-width: 1152px) {
+  .menuAddition {
+    width: 18%;
+  }
+
+  .btnMenu {
+    background-position: 12px 14px;
+    width: 5.5%;
+    height: 81%;
+  }
 }
 
 @media (max-width: 375px) {

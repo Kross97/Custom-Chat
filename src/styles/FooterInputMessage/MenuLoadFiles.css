@@ -82,6 +82,16 @@
   left: 7%;
 }
 
+@media (max-width: 1152px) {
+  .menuLoadFilesHide {
+    width: 24%;
+  }
+
+  .menuLoadFilesHide label:nth-child(1) .icon , .menuLoadFilesHide label:nth-child(2) .icon , .menuLoadFilesHide label:nth-child(3) .icon {
+    width: 19%;
+  }
+}
+
 @media (max-width: 375px) {
 .menuLoadFilesHide {
   height: 225px;
@@ -99,7 +109,4 @@
   left: 37%;
 }
 
-.menuLoadFilesHide label:nth-child(1) .icon , .menuLoadFilesHide label:nth-child(2) .icon , .menuLoadFilesHide label:nth-child(3) .icon {
-  width: 19%;
-}
 }

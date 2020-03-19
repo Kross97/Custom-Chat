@@ -97,11 +97,6 @@ cursor: url('../../img/icon-clicker.png') , pointer;
   max-width: 380px;
 }
 
-.videoValue {
-  width: 100%;
-  height: -3%;
-  max-width: 380px;
-}
 
 /* SHOW IMAGE */
 
@@ -111,9 +106,10 @@ cursor: url('../../img/icon-clicker.png') , pointer;
   z-index: 1;
   left: -420px;
   height: 114.3%;
-  background-color: #242424;
+  background-color: black;
   opacity: 0.7;
   top: -60px;
+  cursor: url('../../img/icon-clicker.png') , pointer;
 }
 
 .imageContainer {
@@ -126,12 +122,31 @@ cursor: url('../../img/icon-clicker.png') , pointer;
   text-align: center;
   vertical-align: middle;
   box-sizing: border-box;
+  cursor: url('../../img/icon-clicker.png') , pointer;
 }
 
 .imgView {
 max-width: 100%;
 }
 
+@media (max-width: 1152px) {
+  .containerItemMessage {
+    max-width: 40%;
+    margin-left: 30px;
+    margin-right: 65px;
+  }
+
+  .backgroundImg {
+    width: 154%;
+    height: 117.3%;
+  }
+
+  .imageContainer {
+    width: 60%;
+    top: 22%;
+    left: 10%;
+  }
+}
 
 @media (max-width: 375px) {
   .containerItemMessage {

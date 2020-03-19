@@ -1,9 +1,7 @@
-@import url('./UserItem_Adaptiv.css');
-
 .imgUser {
-  width: 15.4%;
+  width: 63px;
   border-radius: 63%;
-  height: 67%;
+  height: 63px;
   margin: 3% 0 0px 3%;
   max-width: 20%;
   max-height: 68%;
@@ -21,7 +19,7 @@
 
 .UserContainer > .imgResponce {
   position: absolute;
-  right: 55px;
+  right: 58px;
   top: 1px;
 }
 
@@ -69,7 +67,7 @@
   top: 0;
   right: 3%;
   color: #6c7883;
-  font-size: 0.8em;
+  font-size: 0.9em;
 }
 
 .UserContainer > div span:nth-child(4){
@@ -96,10 +94,6 @@
 }
 
 @media (max-width: 1435px) {
-  .imgUser {
-    height: 55%;
-  }
-
   .UserContainer > div {
     font-size: 1em;
     height: 90%;
@@ -113,44 +107,42 @@
     font-size: 0.75em;
   }
 
-  .UserContainer > div span:nth-child(2) {
-    font-size: 0.7em;
-  }
 }
 
-@media (max-width: 1284px) {
-  .UserContainer > div {
-    padding-left: 5%;
-  }
-
-  .UserContainer > div span:nth-child(4) {
-    height: 23%;
-    padding-top: 0;
-  }
-}
-
-@media (max-width: 1200px) {
+@media (max-width: 1152px) {
   .imgUser {
-    height: 42%;
+    margin: 4% 0 0 0%;
   }
 
+.UserContainer {
+  height: 84px;
+}
+
+.UserContainer > .imgResponce {
+  right: 51px;
+  top: 2px;
+}
+
+.UserContainer > div > article {
+  font-size: 0.9em;
+  bottom: 10%;
+  left: 10%;
+}
+
   .UserContainer > div {
-    font-size: 0.8em;
-    height: 65%;
+    height: 85%;
+    padding-left: 8%;
   }
 
   .UserContainer > div span:nth-child(4) {
-    height: 33%;
+    height: 34%;
     width: 9%;
+    top: 61%;
+    padding-top: 3px;
   }
 }
 
 @media (max-width: 375px) {
-  .imgUser {
-    width: 17.4%;
-    height: 67%;
-  }
-
   .UserContainer > div {
     height: 100%;
     font-size: 1.2em;

@@ -107,6 +107,24 @@
   cursor: url('../../img/icon-clicker.png') , pointer;
 }
 
+@media (max-width: 1152px) {
+  .formAddAudio {
+    left: 28%;
+    width: 50%;
+  }
+
+  .customInput {
+    top: 36px;
+  }
+
+  .btnGroup button {
+    height: 53px;
+  }
+
+  .blockBackground {
+    height: 700px;
+  }
+}
 
 @media (max-width: 375px) {
   .blockBackground {

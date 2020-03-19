@@ -156,6 +156,18 @@
   color: #c20202;
 }
 
+@media (max-width: 1152px) {
+  .formAddUser {
+    top: 15%;
+    left: 17%;
+    width: 70%;
+  }
+
+  .blockBackground {
+    height: 700px;
+  }
+}
+
 @media (max-width: 375px) {
   .blockBackground {
     height: 670px;

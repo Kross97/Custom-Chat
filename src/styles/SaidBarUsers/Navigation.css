@@ -67,6 +67,22 @@
   background-color: #2d4154;
 }
 
+@media (max-width: 1152px) {
+  .search {
+    width: 70%;
+    height: 39px;
+  }
+
+  .menuAddition {
+    width: 60%;
+    left: -275px;
+  }
+
+  .showMenu {
+   left: 10px;
+  }
+}
+
 @media (max-width:375px) {
   .search {
     width: 68%;
