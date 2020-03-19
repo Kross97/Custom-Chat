@@ -32,3 +32,11 @@ export interface IAddNewFlowMessages {
   newFlowMessages: IMessage[],
   message: string,
 }
+
+export interface IActionActionFromID {
+  id: number,
+}
+
+export interface IDeleteMessagesSelected {
+  idMessages: Set<number>,
+}

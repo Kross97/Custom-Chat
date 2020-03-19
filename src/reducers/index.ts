@@ -85,15 +85,15 @@ export const allUsers = createSlice({
     addNewFlowMessagesUserFailed: (state) => {
       state.loadingFlowMessageState = 'loading error';
     },
-    addMessageForDeleteList: (state, action) => {
+    addMessageForDeleteList: (state, action: PayloadAction<Users.IActionActionFromID>) => {
       const { id } = action.payload;
       state.allMessageForDelete.push(id);
     },
-    removeMessageOfDeleteList: (state, action) => {
+    removeMessageOfDeleteList: (state, action: PayloadAction<Users.IActionActionFromID>) => {
       const { id } = action.payload;
       state.allMessageForDelete = state.allMessageForDelete.filter((dateMes) => dateMes !== id);
     },
-    deleteAllMessagesSelected: (state, action) => {
+    deleteAllMessagesSelected: (state, action: PayloadAction<Users.IDeleteMessagesSelected>) => {
       const { currentUserId } = state;
       const { idMessages } = action.payload;
       const { allMessages } = state.allDataUsers[currentUserId];
@@ -102,11 +102,11 @@ export const allUsers = createSlice({
       );
       state.allMessageForDelete = [];
     },
-    zeroingNewMessagesUser: (state, action) => {
+    zeroingNewMessagesUser: (state, action: PayloadAction<Users.IActionActionFromID>) => {
       const { id } = action.payload;
       state.allDataUsers[id].notReadMessages = 0;
     },
-    setNewCurrentUser: (state, action) => {
+    setNewCurrentUser: (state, action: PayloadAction<Users.IActionActionFromID>) => {
       const { id } = action.payload;
       state.currentUserId = id;
       state.allMessageForDelete = [];
@@ -175,13 +175,13 @@ export const actualUiApplication = createSlice({
   name: 'actualUiMessages',
   initialState: actualUiApplicationState,
   reducers: {
-    setUiCountRows: (state, action) => {
+    setUiCountRows: (state, action: PayloadAction<UiApp.ISetCountRows>) => {
       const { count } = action.payload;
       if (count <= 5) {
         state.countRow = count;
       }
     },
-    setSearchValue: (state, action) => {
+    setSearchValue: (state, action: PayloadAction<UiApp.ISetSearchValue>) => {
       const { search } = action.payload;
       state.searchValue = search;
     },

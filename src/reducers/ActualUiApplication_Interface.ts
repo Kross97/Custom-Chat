@@ -11,3 +11,11 @@ export interface IaddLastDateMessage {
   id: number,
   date: string,
 }
+
+export interface ISetCountRows {
+  count: number,
+}
+
+export interface ISetSearchValue {
+  search: string,
+}

@@ -30,7 +30,7 @@ export const zeroingNewMessagesUser = (id: number): AppThunk => async (dispatch:
   try {
     dispatch(allUsers.actions.zeroingNewMessagesUser({ id }));
     const responceUser = await axios.get(`http://localhost:3000/users/?id=${id}`);
-    const userUpdated = { ...responceUser.data[0] };
+    const userUpdated: IUser = { ...responceUser.data[0] };
     userUpdated.notReadMessages = 0;
     await axios.patch(`http://localhost:3000/users/${id}`, userUpdated);
   } catch (e) {
@@ -81,7 +81,7 @@ export const deleteAllSeletedMessage = (
   try {
     dispatch(allUsers.actions.deleteAllMessagesSelected({ idMessages }));
     const responceUser = await axios.get(`http://localhost:3000/users/?id=${id}`);
-    const userUpdated = { ...responceUser.data[0] };
+    const userUpdated: IUser = { ...responceUser.data[0] };
     userUpdated.allMessages = userUpdated.allMessages.filter(
       (message: IMessage) => !idMessages.has(message.id),
     );
@@ -91,7 +91,6 @@ export const deleteAllSeletedMessage = (
   }
 };
 
-// ПОСТОЯННАЯ ЗАГРУЗКА
 export const increaseCountMessagesUser = (
   id: number, factor: number,
 ): AppThunk => async (dispatch: StoreDispatch) => {
@@ -122,7 +121,7 @@ export const loadingAllUsers = (): AppThunk => async (dispatch: StoreDispatch) =
     const responceUsers = await axios.get('http://localhost:3000/users');
     responceUsers.data.forEach((user: IUser) => {
       const { allMessages } = user;
-      const countMessageForChat = 10;
+      const countMessageForChat: number = 10;
       const newRangeMessages = allMessages.length - countMessageForChat - user.notReadMessages;
       const startIndexMessages = newRangeMessages < 0 ? 0 : newRangeMessages;
       user.allMessages = allMessages.slice(startIndexMessages);
@@ -149,7 +148,7 @@ export const addNewMessage = (message: IMessage): AppThunk => async (dispatch: S
   try {
     dispatch(allUsers.actions.addNewMessageSucces({ message }));
     const responceUser = await axios.get(`http://localhost:3000/users/?id=${message.idUser}`);
-    const userUpdated = { ...responceUser.data[0] };
+    const userUpdated: IUser = { ...responceUser.data[0] };
     userUpdated.allMessages.push(message);
     const { notReadMessages } = userUpdated;
     userUpdated.notReadMessages = message.idMainUser === 'Master' ? 0 : notReadMessages + 1;
@@ -168,7 +167,7 @@ export const addNewAudio = (audio: IAudio): AppThunk => async (dispatch: StoreDi
     if (audioResponce.data.length === 0) {
       await axios.post('http://localhost:3000/audio', audioForServer);
     } else {
-      const idAudio = audioResponce.data[0].id;
+      const idAudio: number = audioResponce.data[0].id;
       await axios.delete(`http://localhost:3000/audio/${idAudio}`);
       await axios.post('http://localhost:3000/audio', audioForServer);
     }
