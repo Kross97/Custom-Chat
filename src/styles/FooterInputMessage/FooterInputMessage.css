@@ -13,14 +13,15 @@
   justify-content: space-around;
   align-items: end;
   position: relative;
+  background-color: #17212B;
 }
 
 .formAddMessage > textarea {
   flex-basis: 45%;
   border: none;
-  background-color: #17212B;
+  background-color: inherit;
   resize: none;
-  font-size: 1.5em;
+  font-size: 22px;
   color: #6C7883;
   height: 100%;
   scrollbar-width: thin;
@@ -61,4 +62,21 @@
 
 .btnAddNewMessageDisable{
   cursor: auto;
+}
+
+
+@media (max-width: 375px) {
+  .container {
+    width: 100%;
+    z-index: 3;
+    height: 7.4%;
+  }
+
+  .containerHidden {
+    z-index: 1;
+  }
+
+  .btnClip, .btnAddNewMessage {
+    flex-basis: 7%;
+  }
 }

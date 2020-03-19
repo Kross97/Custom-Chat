@@ -120,7 +120,6 @@ export const loadingAllUsers = (): AppThunk => async (dispatch: StoreDispatch) =
   dispatch(allUsers.actions.loadingUsersFromServerRequest());
   try {
     const responceUsers = await axios.get('http://localhost:3000/users');
-    // Оптимизировать перебор
     responceUsers.data.forEach((user: IUser) => {
       const { allMessages } = user;
       const countMessageForChat = 10;
@@ -146,7 +145,7 @@ export const loadingAudioSingl = (): AppThunk => async (dispatch: StoreDispatch)
 };
 
 export const addNewMessage = (message: IMessage): AppThunk => async (dispatch: StoreDispatch) => {
-  dispatch(allUsers.actions.addNewMessageRequest());
+  dispatch(allUsers.actions.addNewMessageRequest({ addLoad: 'add message requset ' }));
   try {
     dispatch(allUsers.actions.addNewMessageSucces({ message }));
     const responceUser = await axios.get(`http://localhost:3000/users/?id=${message.idUser}`);

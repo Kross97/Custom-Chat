@@ -9,9 +9,14 @@ export interface IStateAllUsers {
   allMessageForDelete: number[],
   isEditUser: boolean,
   loadingState: string,
+  loadingMessageState: string,
   loadingFlowMessageState: string,
 }
 
+
+export interface IAddMessageLoad {
+  addLoad: string,
+}
 
 export interface ILoadingUsers {
   users: IUser[],
@@ -27,4 +32,9 @@ export interface ISetUserId {
 
 export interface IAddMessage {
   message: IMessage,
+}
+
+export interface IAddNewFlowMessages {
+  newFlowMessages: IMessage[],
+  message: string,
 }

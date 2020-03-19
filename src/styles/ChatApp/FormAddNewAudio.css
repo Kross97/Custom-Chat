@@ -1,7 +1,7 @@
 .blockBackground {
   width: 100%;
   height: 1000px;
-  z-index: 1;
+  z-index: 3;
   position: absolute;
   top: 0;
   left: 0;
@@ -12,12 +12,19 @@
 .formAddAudio {
   background-color: #17212b;
   position: absolute;
-  z-index: 2;
+  z-index: 4;
   top: 25%;
   left: 25%;
   width: 44%;
   height: 23%;
   border-radius: 44px;
+}
+
+.formAddAudio > span {
+  position: absolute;
+  top: 8%;
+  right: 40%;
+  color: #c20202;
 }
 
 .formAddAudio > label > input {
@@ -98,4 +105,52 @@
   border: 3px solid #4082bc;
   box-sizing: border-box;
   cursor: url('../../img/icon-clicker.png') , pointer;
+}
+
+
+@media (max-width: 375px) {
+  .blockBackground {
+    height: 670px;
+  }
+
+  .formAddAudio {
+    left: 9%;
+    width: 82%;
+    height: 20%;
+  }
+
+.formAddAudio > label > input  {
+    left: 19%;
+    width: 70%;
+  }
+
+  .formAddAudio > span {
+    right: 32%;
+    font-size: 0.8em;
+  }
+
+  .customInput {
+    width: 70%;
+    height: 33px;
+    font-size: 0.8em;
+    padding-left: 19px;
+    padding-top: 6px;
+    top: 35px;
+  }
+
+  .customInputPlus {
+    right: 12px;
+    width: 10%;
+    height: 87%;
+    background-size: contain;
+  }
+
+  .imgAudio {
+    top: 32%;
+    left: 6%;
+  }
+
+  .btnGroup button {
+    height: 40px;
+  }
 }

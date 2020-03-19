@@ -9,8 +9,6 @@ import footerStyle from '../../styles/FooterInputMessage/FooterInputMessage.css'
 import { IApplicationState } from '../../Global_Interface';
 import * as actions from '../../actions';
 
-const countSymbolsInRow = 47;
-
 const discoverHeightFooter = (count: number) => {
   let heightFooter = '';
   switch (count) {
@@ -43,6 +41,8 @@ const actionCreators = {
 export const FooterInputMessage = () => {
   const [isShowMenuLoad, setIsShowMenuLoad] = useState<string>('hidden');
   const [valueMessage, setValueMessage] = useState<string>('');
+  const [countSymbolsInRow, setCountSymbolsInRow] = useState<number>(0);
+  const [widthTextArea, setWidthTextArea] = useState<number>(0);
 
   const dispatch = useDispatch();
   const { setUiCountRows, addNewMessage } = bindActionCreators(actionCreators, dispatch);
@@ -75,6 +75,11 @@ export const FooterInputMessage = () => {
   };
 
   const inputMessage = ({ target } : React.ChangeEvent<HTMLTextAreaElement>) => {
+    if (target.clientWidth !== widthTextArea) {
+      const widthSymbol = 13.3;
+      setWidthTextArea(target.clientWidth);
+      setCountSymbolsInRow(Math.floor(target.clientWidth / widthSymbol));
+    }
     setValueMessage(target.value);
     if ((target.value.length % countSymbolsInRow) === 0) {
       const countRows = target.value.length / countSymbolsInRow;
@@ -99,8 +104,13 @@ export const FooterInputMessage = () => {
     [footerStyle.btnAddNewMessageDisable]: valueMessage.length === 0,
   });
 
+  const styleFooter = cn({
+    [footerStyle.container]: true,
+    [footerStyle.containerHidden]: idCurrentUser === -1,
+  });
+
   return (
-    <footer className={footerStyle.container} style={{ height: valueHeight }}>
+    <footer className={styleFooter} style={{ height: valueHeight }}>
       <form onSubmit={submitMessage} className={footerStyle.formAddMessage}>
         <MenuLoadFiles isShowMenuLoad={isShowMenuLoad} />
         <button onClick={showMenuLoadFiles} className={styleBtnClip} disabled={idCurrentUser === -1} aria-label="showMenu" type="button" />

@@ -1,10 +1,12 @@
+@import url('./UserItem_Adaptiv.css');
+
 .imgUser {
-  width: 20%;
-  border-radius: 45px;
-  height: 68%;
-  margin: 11px 0 0px 8px;
-  max-width: 64px;
-  max-height: 62px;
+  width: 15.4%;
+  border-radius: 63%;
+  height: 67%;
+  margin: 3% 0 0px 3%;
+  max-width: 20%;
+  max-height: 68%;
 }
 
 .UserContainer{
@@ -15,6 +17,12 @@
   display: flex;
   padding-left: 15px;
   box-sizing: border-box;
+}
+
+.UserContainer > .imgResponce {
+  position: absolute;
+  right: 55px;
+  top: 1px;
 }
 
 .UserContainerActive {
@@ -28,8 +36,8 @@
   cursor: url('../../img/icon-clicker.png') , pointer;
   display: block;
   box-sizing: border-box;
-  padding-left: 40px;
-  padding-top: 5px;
+  padding-left: 12%;
+  padding-top: 1.5%;
   position: relative;
   color: #fff;
   text-decoration: none;
@@ -39,7 +47,7 @@
   color: #67737e;
   font-size: 0.8em;
   position: absolute;
-  bottom: 18px;
+  bottom: 20%;
 }
 
 .UserContainer > div > article > span {
@@ -59,15 +67,15 @@
 .UserContainer > div span:nth-child(2) {
   position: absolute;
   top: 0;
-  right: 8px;
+  right: 3%;
   color: #6c7883;
   font-size: 0.8em;
 }
 
 .UserContainer > div span:nth-child(4){
   position: absolute;
-  top: 52px;
-  right: 15px;
+  top: 53%;
+  right: 4%;
   width: 8%;
   height: 28%;
   text-align: center;
@@ -85,4 +93,81 @@
 
 .UserContainerActive > div span:nth-child(2) {
   color: #ffff;
+}
+
+@media (max-width: 1435px) {
+  .imgUser {
+    height: 55%;
+  }
+
+  .UserContainer > div {
+    font-size: 1em;
+    height: 90%;
+  }
+
+  .UserContainer > div > article {
+    font-size: 0.9em;
+  }
+
+  .UserContainer > div span:nth-child(4) {
+    font-size: 0.75em;
+  }
+
+  .UserContainer > div span:nth-child(2) {
+    font-size: 0.7em;
+  }
+}
+
+@media (max-width: 1284px) {
+  .UserContainer > div {
+    padding-left: 5%;
+  }
+
+  .UserContainer > div span:nth-child(4) {
+    height: 23%;
+    padding-top: 0;
+  }
+}
+
+@media (max-width: 1200px) {
+  .imgUser {
+    height: 42%;
+  }
+
+  .UserContainer > div {
+    font-size: 0.8em;
+    height: 65%;
+  }
+
+  .UserContainer > div span:nth-child(4) {
+    height: 33%;
+    width: 9%;
+  }
+}
+
+@media (max-width: 375px) {
+  .imgUser {
+    width: 17.4%;
+    height: 67%;
+  }
+
+  .UserContainer > div {
+    height: 100%;
+    font-size: 1.2em;
+  }
+
+  .UserContainer > div > article {
+    font-size: 0.9em;
+  }
+
+  .UserContainer > div span:nth-child(4) {
+    font-size: 0.8em;
+    height: 30%;
+    width: 10%;
+    padding-top: 2px;
+  }
+
+  .UserContainer > div span:nth-child(2) {
+    font-size: 0.8em;
+  }
 }

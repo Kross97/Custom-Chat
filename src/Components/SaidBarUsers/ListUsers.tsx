@@ -45,7 +45,7 @@ export const ListUsers = () => {
       key={user.id}
       user={user}
       message={user.allMessages[user.allMessages.length - 1]}
-      option="not create message"
+      option="type user not create message"
     />
     )
   ));
@@ -61,7 +61,7 @@ export const ListUsers = () => {
           key={user.id}
           user={user}
           message={isHaveMessageValue}
-          option="not create message"
+          option="type message not create message"
         />
       );
     }

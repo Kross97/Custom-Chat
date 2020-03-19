@@ -10,6 +10,26 @@ word-break: break-all;
 cursor: url('../../img/icon-clicker.png') , pointer;
 }
 
+.containerItemMessage > audio{
+  background-color: blue;
+}
+
+.containerItemMessage > a {
+  color: #fff;
+}
+
+.containerItemMessage > a > img {
+      position: absolute;
+      top: 23px;
+      left: 6%;
+}
+
+.containerItemMessage > .imgResponce {
+  position: absolute;
+  bottom: 13px;
+  right: 23px;
+}
+
 .messageUser {
   background-color: #17212b;
   float: left;
@@ -45,7 +65,7 @@ cursor: url('../../img/icon-clicker.png') , pointer;
   font-size: 1em;
 }
 
-.messageUser span:nth-child(3) {
+.messageUser span:nth-child(4) {
   border-bottom: 26px solid #17212b;
   border-left: 30px solid transparent;
   position: absolute;
@@ -53,7 +73,7 @@ cursor: url('../../img/icon-clicker.png') , pointer;
   left: -17px;
 }
 
-.messageMaster span:nth-child(3) {
+.messageMaster span:nth-child(4) {
   border-bottom: 26px solid #4082bc;
   border-right: 30px solid transparent;
   position: absolute;
@@ -61,11 +81,11 @@ cursor: url('../../img/icon-clicker.png') , pointer;
   right: -18px;
 }
 
-.messageForDeleteUser span:nth-child(3){
+.messageForDeleteUser span:nth-child(4){
   border-bottom: 26px solid #373738;
 }
 
-.messageForDeleteMaster span:nth-child(3){
+.messageForDeleteMaster span:nth-child(4){
   border-bottom: 26px solid #3f5a75;
 }
 
@@ -110,4 +130,40 @@ cursor: url('../../img/icon-clicker.png') , pointer;
 
 .imgView {
 max-width: 100%;
+}
+
+
+@media (max-width: 375px) {
+  .containerItemMessage {
+    margin: 15px 0;
+    padding: 13px 23px 42px 15px;
+    max-width: 85%;
+  }
+
+  .messageMaster {
+    margin: 15px 30px;
+    padding-left: 45px;
+  }
+
+  .messageMaster .dateMessage {
+    right: 11px;
+  }
+
+  .backgroundImg {
+    z-index: 3;
+    width: 212.7%;
+    top: -47px;
+  }
+
+  .containerItemMessage > a > img {
+        position: absolute;
+        top: 10px;
+        left: 7%;
+  }
+
+  .imageContainer {
+    width: 90%;
+    top: 22%;
+    left: 6%;
+  }
 }

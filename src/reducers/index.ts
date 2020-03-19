@@ -13,6 +13,7 @@ const allUsersState: Users.IStateAllUsers = {
   isEditUser: false,
   currentUserId: -1,
   loadingState: '',
+  loadingMessageState: '',
   loadingFlowMessageState: '',
 };
 
@@ -55,28 +56,29 @@ export const allUsers = createSlice({
     editCurrentUser: (state) => {
       state.isEditUser = true;
     },
-    editUserSucces: (state, action) => {
+    editUserSucces: (state, action: PayloadAction<Users.IAddUsers>) => {
       const { user } = action.payload;
       state.isEditUser = false;
       state.allDataUsers[user.id] = user;
     },
-    addNewMessageRequest: (state) => {
-      state.loadingState = 'add message Request';
+    addNewMessageRequest: (state, action: PayloadAction<Users.IAddMessageLoad>) => {
+      const { addLoad } = action.payload;
+      state.loadingMessageState = addLoad;
     },
     addNewMessageSucces: (state, action: PayloadAction<Users.IAddMessage>) => {
       const { message } = action.payload;
       state.allDataUsers[message.idUser].allMessages.push(message);
       const { notReadMessages } = state.allDataUsers[message.idUser];
       state.allDataUsers[message.idUser].notReadMessages = message.idMainUser === 'Master' ? 0 : notReadMessages + 1;
-      state.loadingState = 'add message Succes';
+      state.loadingMessageState = 'add message Succes';
     },
     addNewMessageFailed: (state) => {
-      state.loadingState = 'add message Failed';
+      state.loadingMessageState = 'add message Failed';
     },
     addNewFlowMessagesUserRequest: (state) => {
       state.loadingFlowMessageState = 'loading messages';
     },
-    addNewFlowMessagesUserSucces: (state, action) => {
+    addNewFlowMessagesUserSucces: (state, action: PayloadAction<Users.IAddNewFlowMessages>) => {
       const { newFlowMessages, message } = action.payload;
       const { currentUserId } = state;
       state.allDataUsers[currentUserId].allMessages = newFlowMessages;
@@ -108,7 +110,7 @@ export const allUsers = createSlice({
     },
     setNewCurrentUser: (state, action) => {
       const { id } = action.payload;
-      state.currentUserId = state.currentUserId === id ? -1 : id;
+      state.currentUserId = id;
       state.allMessageForDelete = [];
     },
     deleteCurrentUser: (state) => {
@@ -118,6 +120,7 @@ export const allUsers = createSlice({
         const newAllUsersId = allUsersId.filter((id) => id !== currentUserId);
         state.allDataUsers = newAllDataUsers;
         state.allUsersId = newAllUsersId;
+        state.currentUserId = -1;
       }
     },
     deleteCurrentUserAllMessages: (state) => {

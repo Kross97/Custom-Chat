@@ -1,3 +1,5 @@
+/* @import url(mobile.css) (max-device-width:480px); */
+
 .containerMessages {
   background-image: url('../../img/fonDialog.jpg');
   background-repeat: no-repeat;
@@ -30,4 +32,13 @@
   margin: 5% 0 5% 37%;
   border-radius: 25px;
   text-align: center;
+}
+
+@media (max-width: 375px) {
+  .checkMessages {
+    width: 55%;
+    height: 3.8%;
+    margin-left: 15%;
+  }
+
 }

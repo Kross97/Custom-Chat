@@ -66,3 +66,9 @@
 .btnShowMenu:hover {
   background-color: #2d4154;
 }
+
+@media (max-width:375px) {
+  .search {
+    width: 68%;
+  }
+}

@@ -14,6 +14,7 @@ const actionCreators = {
 export default () => {
   const [audioSrc, setAudioSrc] = useState<string>('');
   const [audioName, setAudioName] = useState<string>('');
+  const [error, setError] = useState<string>('');
   const { showFormAddAudio } = useContext(ContextFormAddUser);
 
   const dispatch = useDispatch();
@@ -33,10 +34,15 @@ export default () => {
   }
 
   const addAudio = () => {
+    if(audioSrc === '') {
+     setError('error');
+      return;
+    }
     const audio = {
       id: Number(_.uniqueId()),
       src: audioSrc,
     };
+    setError('');
     addNewAudio(audio);
     showFormAddAudio();
   }
@@ -52,6 +58,7 @@ export default () => {
               </div>
               <input onChange={getAudioSrc} type="file" accept="audio/*" />
             </label>
+            {error !== '' && <span>Fill in all form fields</span>}
             <div className={audioStyle.btnGroup}>
           <button type="submit">Save</button>
           <button onClick={showFormAddAudio} type="button">Cancel</button>

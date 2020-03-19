@@ -17,10 +17,13 @@ const createValueMessage = (type: string, value: string, viewImage: viewImage) =
       return <img className={itemMessage.imgValue} onClick={viewImage} src={value} alt="фото" aria-hidden />;
     case 'audio':
       return <audio controls src={value} muted />;
-    case 'doc':
-      return <a download href={value}>upload file</a>;
     default:
-      return <video className={itemMessage.videoValue} controls src={value} muted />;
+      return (
+        <a onClick={(e) => { e.stopPropagation(); }} download href={value}>
+          <img src="../src/img/document.png" alt="doc" />
+          Upload file
+        </a>
+      );
   }
 };
 
@@ -42,6 +45,10 @@ export const ItemMessage = (props: IItemMessageProps) => {
 
   const listMessageForDelete = useSelector(
     ({ allUsers: { allMessageForDelete } }: IApplicationState) => allMessageForDelete,
+  );
+
+  const loadingMessageState = useSelector(
+    (state: IApplicationState) => state.allUsers.loadingMessageState,
   );
 
   const listSetMessagesDelete = new Set(listMessageForDelete);
@@ -73,6 +80,8 @@ export const ItemMessage = (props: IItemMessageProps) => {
   });
 
   const valueMessage = createValueMessage(message.type, message.value, viewImage);
+
+  const imgNotificationsPath = loadingMessageState === 'add message requset ' ? './src/img/icon-sended.png' : './src/img/icon-readen.png';
   return (
     <>
       {isShowImage === 'show' && (<div onClick={viewImage} className={itemMessage.backgroundImg} aria-hidden />)}
@@ -87,6 +96,7 @@ export const ItemMessage = (props: IItemMessageProps) => {
         aria-hidden
       >
         {valueMessage}
+        {message.idMainUser === 'Master' && <img className={itemMessage.imgResponce} src={imgNotificationsPath} alt="resp" />}
         <span className={itemMessage.dateMessage}>{`${hourWriting}:${minuteWriting}`}</span>
         <span />
       </article>

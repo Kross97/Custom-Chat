@@ -4,3 +4,17 @@
   height: 1000px;
   display: inline-block;
 }
+
+@media (max-width:375px) {
+.container {
+  position: absolute;
+  width: 100%;
+  height: 670px;
+  z-index: 2;
+  background-color: #17212b;
+  }
+
+  .containerMobHidden {
+    z-index: 1;
+  }
+}

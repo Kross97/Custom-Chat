@@ -73,7 +73,7 @@
 }
 
 .menuLoadFilesHide label:nth-child(3) .icon {
-  background-image: url('../../img/video.png');
+  background-image: url('../../img/document.png');
   background-repeat: no-repeat;
   width: 11%;
   height: 51%;
@@ -82,12 +82,24 @@
   left: 7%;
 }
 
-.menuLoadFilesHide label:nth-child(4) .icon {
-  background-image: url('../../img/document.png');
-  background-repeat: no-repeat;
-  width: 11%;
-  height: 51%;
-  position: absolute;
-  top: 15%;
-  left: 7%;
+@media (max-width: 375px) {
+.menuLoadFilesHide {
+  height: 225px;
+  z-index: 1;
+  bottom: 35px;
+  left: -70px;
+}
+
+.menuLoadFilesShow {
+    width: 39%;
+    left: 12px;
+}
+
+.customInput > span {
+  left: 37%;
+}
+
+.menuLoadFilesHide label:nth-child(1) .icon , .menuLoadFilesHide label:nth-child(2) .icon , .menuLoadFilesHide label:nth-child(3) .icon {
+  width: 19%;
+}
 }

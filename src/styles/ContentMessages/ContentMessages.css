@@ -11,3 +11,17 @@
   width: 100%;
   height: 92.5%;
 }
+
+
+@media (max-width: 375px)  {
+  .container {
+    width: 100%;
+    height: 620px;
+    position: absolute;
+    z-index: 1;
+  }
+
+  .containerMobActive {
+    z-index: 3;
+  }
+}

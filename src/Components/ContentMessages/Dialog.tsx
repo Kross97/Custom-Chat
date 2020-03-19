@@ -10,7 +10,6 @@ import { ItemMessage } from './ItemMessage';
 import * as actions from '../../actions';
 
 const actionCreators = {
-  loadingAllUsers: actions.loadingAllUsers,
   increaseCountMessagesUser: actions.increaseCountMessagesUser,
   zeroingNewMessagesUser: actions.zeroingNewMessagesUser,
 };
@@ -49,19 +48,13 @@ export default () => {
 
   const dispatch = useDispatch();
   const {
-    loadingAllUsers,
     increaseCountMessagesUser,
     zeroingNewMessagesUser,
   } = bindActionCreators(actionCreators, dispatch);
 
-  const allUsersList = useSelector(({ allUsers: { allUsersId } }: IApplicationState) => allUsersId);
   const stateLoadingFlowMessages = useSelector(
     ({ allUsers }: IApplicationState) => allUsers.loadingFlowMessageState,
   );
-
-  useEffect(() => {
-    loadingAllUsers();
-  }, [allUsersList.length]);
 
   let currentIdUser = -1;
   if (id) {

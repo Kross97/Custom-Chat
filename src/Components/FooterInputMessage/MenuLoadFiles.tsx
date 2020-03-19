@@ -65,16 +65,9 @@ export const MenuLoadFiles = (props: IMenuLoadFilesProps) => {
       <label>
         <div className={menuStyle.customInput}>
           <div className={menuStyle.icon} />
-          <span>load video</span>
-        </div>
-        <input onChange={addFileToMessage('video')} type="file" accept="video/*" />
-      </label>
-      <label>
-        <div className={menuStyle.customInput}>
-          <div className={menuStyle.icon} />
           <span>load file link</span>
         </div>
-        <input onChange={addFileToMessage('doc')} type="file" accept="file_extension" />
+        <input onChange={addFileToMessage('doc')} type="file" accept="file_extension(.doc, .docx, .xlt, .txt, .png,)" />
       </label>
     </div>
   );
