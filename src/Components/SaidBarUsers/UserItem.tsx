@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { bindActionCreators } from 'redux';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useRouteMatch } from 'react-router-dom';
 import cn from 'classnames';
 import { allUsers } from '../../reducers';
 import { UsertItemNotifications } from './UsertItemNotifications';
@@ -16,10 +16,8 @@ const actionCreators = {
 export const UserItem = React.memo((props: IUserItemProps) => {
   const { user, message, option } = props;
 
-  const location = useLocation();
-  const indexIdUser = location.pathname.indexOf(':') + 1;
-  const idUserInURl = Number(location.pathname.slice(indexIdUser));
-  const urlCurrentUserId = idUserInURl ? Number(location.pathname.slice(indexIdUser)) : -1;
+  const id = useRouteMatch<{ id: string }>('/dialog/:id')?.params.id;
+  const urlCurrentUserId = id ? Number(id.slice(1)) : -1;
 
   const dispatch = useDispatch();
   const { setNewCurrentUser } = bindActionCreators(actionCreators, dispatch);
