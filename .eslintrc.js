@@ -6,7 +6,7 @@ module.exports = {
     'react-hooks',
   ],
   extends: [
-    'airbnb-typescript',
+    'eslint-config-airbnb-typescript',
   ],
   rules: {
     "no-return-assign": 0,
