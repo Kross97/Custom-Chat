@@ -28,6 +28,15 @@
   scrollbar-color: #4082bc #242f3d;
 }
 
+.formAddMessage > textarea::-webkit-scrollbar {
+   width: 7px;
+   background-color: #242f3d;
+}
+
+.formAddMessage > textarea::-webkit-scrollbar-thumb {
+   background-color: #4082bc;
+}
+
 .btnClip {
   flex-basis: 3%;
   background-image: url('../../img/icon - paper-clip.png');

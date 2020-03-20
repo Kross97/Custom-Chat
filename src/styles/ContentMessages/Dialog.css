@@ -20,6 +20,15 @@
   margin-top: 0;
 }
 
+.containerMessages > ul::-webkit-scrollbar {
+   width: 7px;
+   background-color: #242f3d;
+}
+
+.containerMessages > ul::-webkit-scrollbar-thumb {
+   background-color: #4082bc;
+}
+
 .checkMessages {
   background-color: #242f3d;
   color: #fff;
