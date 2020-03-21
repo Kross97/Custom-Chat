@@ -20,7 +20,7 @@ scrollbar-color: #4082bc #242f3d;
 
 .afterSearch {
   height: auto;
-  max-height: 44%;
+  max-height: 39%;
 }
 
 .countAfterSearch {
@@ -55,6 +55,6 @@ scrollbar-color: #4082bc #242f3d;
 
   .afterSearch {
     height: auto;
-    max-height: 33.5%;
+    max-height: 36%;
   }
 }

@@ -94,7 +94,7 @@ margin-top: 5px;
 }
 
 .userContainer {
-  flex-basis: 23%;
+  flex-basis: 24%;
   height: auto;
   margin-left: 20px;
   text-align: left;
@@ -153,15 +153,16 @@ margin-top: 5px;
   .userContainer > img {
     display: inline;
     position: absolute;
-    width: 12%;
+    width: 44px;
     left: 54px;
     top: 8px;
+    height: 44px;
+    border-radius: 75px;
   }
 
   .userContainer {
     flex-basis: 50%;
     margin-left: 85px;
     padding-left: 16px;
-    padding-top: 11px;
   }
 }
