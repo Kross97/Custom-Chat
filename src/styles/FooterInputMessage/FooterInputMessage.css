@@ -26,6 +26,8 @@
   height: 100%;
   scrollbar-width: thin;
   scrollbar-color: #4082bc #242f3d;
+  outline: none;
+  padding: 0;
 }
 
 .formAddMessage > textarea::-webkit-scrollbar {
@@ -37,6 +39,7 @@
    background-color: #4082bc;
 }
 
+
 .btnClip {
   flex-basis: 3%;
   background-image: url('../../img/icon - paper-clip.png');
@@ -47,6 +50,7 @@
   background-color: #17212b;
   cursor: url('../../img/icon-clicker.png') , pointer;
   margin-bottom: 8px;
+  outline: none;
 }
 
 .btnClipDisable {
@@ -67,6 +71,7 @@
   background-color: #17212b;
   cursor: url('../../img/icon-clicker.png') , pointer;
   margin-bottom: 6px;
+  outline: none;
 }
 
 .btnAddNewMessageDisable{

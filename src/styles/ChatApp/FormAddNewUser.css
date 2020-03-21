@@ -69,6 +69,7 @@
   color: #636f7a;
   border-radius: 30px;
   font-size: 1.1em;
+  outline: none;
 }
 
 .dataBtns button:hover {

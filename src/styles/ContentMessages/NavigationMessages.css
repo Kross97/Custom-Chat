@@ -19,6 +19,7 @@ background-position: 16px 15px;
 margin-right: 27px;
 border-radius: 50px;
 margin-top: 5px;
+outline: none;
 }
 
 .btnMenu:hover {
@@ -34,6 +35,7 @@ margin-top: 5px;
 .btnBack {
   background-image: url('../../img/icon - arrowleft.png');
   background-repeat: no-repeat;
+  outline: none;
 }
 
 .menuAddition {
@@ -67,6 +69,7 @@ margin-top: 5px;
   font-size: 1.1em;
   text-align: left;
   cursor: url('../../img/icon-clicker.png') , pointer;
+  outline: none;
 }
 
 .menuAddition button:hover{
