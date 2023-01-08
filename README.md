@@ -1,4 +1,4 @@
-# Dex-Custom-Chat
+# (Третье тестовое Dex кастомный чат)
 
 Шаг 1 : npm run start
 
